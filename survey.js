@@ -397,7 +397,7 @@ let surveyState = {
 
 // Webhook Configuration
 // n8n webhook URL'inizi buraya ekleyin
-const SURVEY_WEBHOOK_URL = 'https://YOUR-N8N-INSTANCE.com/webhook/carettask-survey';
+const SURVEY_WEBHOOK_URL = 'https://n8n.carettask.com/webhook/carettask-survey';
 
 // Submit survey data to webhook
 async function submitSurveyToWebhook() {
