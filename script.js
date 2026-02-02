@@ -21,6 +21,18 @@ function initCookieBanner() {
     const rejectBtn = document.getElementById('rejectCookies');
     const manageBtn = document.getElementById('managePrefs');
 
+    // Alt sayfalarda cookie banner yoksa, sadece mevcut tercihleri uygula
+    if (!cookieBanner || !acceptBtn || !rejectBtn || !manageBtn) {
+        // Mevcut cookie tercihlerini uygula (analytics icin onemli)
+        const savedPrefs = localStorage.getItem('cookiePreferences');
+        if (savedPrefs) {
+            try {
+                applyCookiePreferences(JSON.parse(savedPrefs));
+            } catch (e) {}
+        }
+        return;
+    }
+
     // Check if user has already made a choice
     const cookieChoice = localStorage.getItem('cookieConsent');
 
@@ -29,6 +41,14 @@ function initCookieBanner() {
         setTimeout(() => {
             cookieBanner.classList.add('show');
         }, 1000);
+    } else {
+        // Mevcut tercihleri uygula
+        const savedPrefs = localStorage.getItem('cookiePreferences');
+        if (savedPrefs) {
+            try {
+                applyCookiePreferences(JSON.parse(savedPrefs));
+            } catch (e) {}
+        }
     }
 
     // Accept all cookies
