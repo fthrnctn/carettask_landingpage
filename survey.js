@@ -414,24 +414,61 @@ async function submitSurveyToWebhook() {
         language: navigator.language
     };
 
+    console.log('📤 Sending survey data to:', SURVEY_WEBHOOK_URL);
+    console.log('📋 Survey data:', JSON.stringify(surveyData, null, 2));
+
+    const jsonData = JSON.stringify(surveyData);
+
+    // Try fetch first, fallback to XMLHttpRequest for Safari compatibility
     try {
         const response = await fetch(SURVEY_WEBHOOK_URL, {
             method: 'POST',
+            mode: 'cors',
+            credentials: 'omit',
             headers: {
                 'Content-Type': 'application/json',
+                'Accept': 'application/json'
             },
-            body: JSON.stringify(surveyData)
+            body: jsonData
         });
 
+        console.log('📨 Response status:', response.status);
+
         if (!response.ok) {
-            console.error('Survey submission failed:', response.status);
+            const errorText = await response.text();
+            console.error('❌ Survey submission failed:', response.status, errorText);
         } else {
             const result = await response.json();
-            console.log('Survey submitted successfully:', result.survey_id);
+            console.log('✅ Survey submitted successfully:', result);
         }
     } catch (error) {
-        // Silently fail - don't interrupt user experience
-        console.error('Survey webhook error:', error);
+        console.error('⚠️ Fetch failed, trying XMLHttpRequest:', error.message);
+
+        // Fallback to XMLHttpRequest for older Safari versions
+        try {
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', SURVEY_WEBHOOK_URL, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.setRequestHeader('Accept', 'application/json');
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        console.log('✅ Survey submitted via XHR:', xhr.responseText);
+                    } else {
+                        console.error('❌ XHR submission failed:', xhr.status);
+                    }
+                }
+            };
+
+            xhr.onerror = function() {
+                console.error('❌ XHR error occurred');
+            };
+
+            xhr.send(jsonData);
+        } catch (xhrError) {
+            console.error('❌ XHR fallback also failed:', xhrError);
+        }
     }
 }
 

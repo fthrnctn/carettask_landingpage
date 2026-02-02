@@ -1,0 +1,8 @@
+# CaretTask Robots.txt
+# https://carettask.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://carettask.com/sitemap.xml
