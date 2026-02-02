@@ -43,26 +43,171 @@ function initCookieBanner() {
         hideCookieBanner();
     });
 
-    // Manage preferences (could open a modal)
+    // Manage preferences - open modal
     manageBtn.addEventListener('click', () => {
-        // For now, just show an alert
-        // In production, this would open a preferences modal
-        alert('Çerez tercihleri ayarları yakında eklenecek.');
+        openCookiePrefs();
     });
+}
+
+// Open Cookie Preferences Modal
+function openCookiePrefs() {
+    const modal = document.getElementById('cookiePrefsModal');
+
+    // Load saved preferences
+    loadCookiePreferences();
+
+    // Show modal
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+
+    // Close on overlay click
+    modal.onclick = function(e) {
+        if (e.target === modal) {
+            closeCookiePrefs();
+        }
+    };
+
+    // Close on Escape key
+    document.addEventListener('keydown', handleCookiePrefsEscape);
+}
+
+function handleCookiePrefsEscape(e) {
+    if (e.key === 'Escape') {
+        closeCookiePrefs();
+    }
+}
+
+// Close Cookie Preferences Modal
+function closeCookiePrefs() {
+    const modal = document.getElementById('cookiePrefsModal');
+    modal.classList.remove('show');
+    document.body.style.overflow = '';
+
+    // Remove escape key listener
+    document.removeEventListener('keydown', handleCookiePrefsEscape);
+}
+
+// Load saved cookie preferences into checkboxes
+function loadCookiePreferences() {
+    const savedPrefs = localStorage.getItem('cookiePreferences');
+
+    if (savedPrefs) {
+        const prefs = JSON.parse(savedPrefs);
+        document.getElementById('cookieAnalytics').checked = prefs.analytics || false;
+        document.getElementById('cookieFunctional').checked = prefs.functional || false;
+        document.getElementById('cookieMarketing').checked = prefs.marketing || false;
+    } else {
+        // Default: all unchecked except necessary
+        document.getElementById('cookieAnalytics').checked = false;
+        document.getElementById('cookieFunctional').checked = false;
+        document.getElementById('cookieMarketing').checked = false;
+    }
+}
+
+// Save cookie preferences
+function savePreferences() {
+    const prefs = {
+        necessary: true, // Always true
+        analytics: document.getElementById('cookieAnalytics').checked,
+        functional: document.getElementById('cookieFunctional').checked,
+        marketing: document.getElementById('cookieMarketing').checked
+    };
+
+    // Save to localStorage
+    localStorage.setItem('cookiePreferences', JSON.stringify(prefs));
+    localStorage.setItem('cookieConsent', 'custom');
+    localStorage.setItem('cookieConsentDate', new Date().toISOString());
+
+    // Apply preferences
+    applyCookiePreferences(prefs);
+
+    // Close modal and hide banner
+    closeCookiePrefs();
+    hideCookieBanner();
+
+    console.log('Cookie preferences saved:', prefs);
+}
+
+// Reject all optional cookies
+function rejectAllCookies() {
+    const prefs = {
+        necessary: true,
+        analytics: false,
+        functional: false,
+        marketing: false
+    };
+
+    // Update checkboxes
+    document.getElementById('cookieAnalytics').checked = false;
+    document.getElementById('cookieFunctional').checked = false;
+    document.getElementById('cookieMarketing').checked = false;
+
+    // Save to localStorage
+    localStorage.setItem('cookiePreferences', JSON.stringify(prefs));
+    localStorage.setItem('cookieConsent', 'essential');
+    localStorage.setItem('cookieConsentDate', new Date().toISOString());
+
+    // Apply preferences
+    applyCookiePreferences(prefs);
+
+    // Close modal and hide banner
+    closeCookiePrefs();
+    hideCookieBanner();
+
+    console.log('All optional cookies rejected');
+}
+
+// Apply cookie preferences (enable/disable tracking)
+function applyCookiePreferences(prefs) {
+    if (prefs.analytics) {
+        // Initialize analytics (Google Analytics, etc.)
+        console.log('Analytics cookies enabled');
+    } else {
+        // Disable/remove analytics
+        console.log('Analytics cookies disabled');
+    }
+
+    if (prefs.functional) {
+        // Enable functional features
+        console.log('Functional cookies enabled');
+    } else {
+        console.log('Functional cookies disabled');
+    }
+
+    if (prefs.marketing) {
+        // Enable marketing/advertising
+        console.log('Marketing cookies enabled');
+    } else {
+        console.log('Marketing cookies disabled');
+    }
 }
 
 function setCookieConsent(type) {
     localStorage.setItem('cookieConsent', type);
     localStorage.setItem('cookieConsentDate', new Date().toISOString());
 
-    // Here you would initialize analytics, tracking, etc. based on consent
+    // Set granular preferences based on type
+    let prefs;
     if (type === 'all') {
+        prefs = {
+            necessary: true,
+            analytics: true,
+            functional: true,
+            marketing: true
+        };
         console.log('All cookies accepted');
-        // Initialize analytics, marketing cookies, etc.
     } else {
+        prefs = {
+            necessary: true,
+            analytics: false,
+            functional: false,
+            marketing: false
+        };
         console.log('Only essential cookies');
-        // Only essential cookies
     }
+
+    localStorage.setItem('cookiePreferences', JSON.stringify(prefs));
+    applyCookiePreferences(prefs);
 }
 
 function hideCookieBanner() {

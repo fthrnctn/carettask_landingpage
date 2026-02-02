@@ -376,7 +376,7 @@
             </div>
             <div class="footer-divider"></div>
             <div class="footer-bottom">
-                <p>© 2026 CaretTask. Tüm hakları saklıdır.</p>
+                <p>© 2025 CaretTask. Tüm hakları saklıdır.</p>
                 <button class="language-btn">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/>
@@ -406,15 +406,142 @@
                 </div>
                 <p>Deneyiminizi kişiselleştirmek ve hizmetlerimizi geliştirmek için çerezler kullanıyoruz. Tercihlerinizi ayarlayabilir veya detaylı bilgi alabilirsiniz.</p>
                 <div class="cookie-links">
-                    <a href="#">KVKK Aydınlatma Metni</a>
-                    <a href="#">Gizlilik Politikası</a>
-                    <a href="#">Çerez Politikası</a>
+                    <a href="kvkk/">KVKK Aydınlatma Metni</a>
+                    <a href="gizlilik-politikasi/">Gizlilik Politikası</a>
+                    <a href="cerez-politikasi/">Çerez Politikası</a>
                 </div>
             </div>
             <div class="cookie-buttons">
                 <button class="btn btn-outline" id="managePrefs">Tercihleri Yönet</button>
                 <button class="btn btn-secondary" id="rejectCookies">Sadece Zorunlu</button>
                 <button class="btn btn-primary" id="acceptCookies">Tümünü Kabul Et</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Preferences Modal -->
+    <div id="cookiePrefsModal" class="modal-overlay">
+        <div class="cookie-prefs-modal">
+            <div class="cookie-prefs-header">
+                <div class="cookie-prefs-title">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#334E68" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                    </svg>
+                    <h2>Çerez Tercihlerini Yönet</h2>
+                </div>
+                <button class="cookie-prefs-close" onclick="closeCookiePrefs()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="cookie-prefs-content">
+                <p class="cookie-prefs-intro">Aşağıdaki çerez kategorilerini açıp kapatarak tercihlerinizi özelleştirebilirsiniz. Zorunlu çerezler sitemizin düzgün çalışması için gereklidir ve kapatılamaz.</p>
+
+                <!-- Zorunlu Çerezler -->
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <div class="cookie-category-info">
+                            <div class="cookie-category-icon required">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>Zorunlu Çerezler</h4>
+                                <span class="cookie-category-badge required">Her Zaman Aktif</span>
+                            </div>
+                        </div>
+                        <div class="cookie-toggle disabled">
+                            <input type="checkbox" id="cookieNecessary" checked disabled>
+                            <label for="cookieNecessary"></label>
+                        </div>
+                    </div>
+                    <p class="cookie-category-desc">Bu çerezler web sitesinin temel işlevlerini sağlar ve devre dışı bırakılamaz. Genellikle gizlilik tercihlerinizi ayarlamak, oturum açmak veya form doldurmak gibi hizmet taleplerine yanıt olarak ayarlanır.</p>
+                </div>
+
+                <!-- Analitik Çerezler -->
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <div class="cookie-category-info">
+                            <div class="cookie-category-icon analytics">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="20" x2="18" y2="10"/>
+                                    <line x1="12" y1="20" x2="12" y2="4"/>
+                                    <line x1="6" y1="20" x2="6" y2="14"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>Analitik Çerezler</h4>
+                                <span class="cookie-category-badge optional">İzne Tabi</span>
+                            </div>
+                        </div>
+                        <div class="cookie-toggle">
+                            <input type="checkbox" id="cookieAnalytics">
+                            <label for="cookieAnalytics"></label>
+                        </div>
+                    </div>
+                    <p class="cookie-category-desc">Bu çerezler, ziyaretçilerin web sitesiyle nasıl etkileşime girdiğini anlamamıza yardımcı olur. Ziyaretçi sayısı, hemen çıkma oranı ve trafik kaynakları gibi bilgiler toplar.</p>
+                </div>
+
+                <!-- İşlevsellik Çerezleri -->
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <div class="cookie-category-info">
+                            <div class="cookie-category-icon functional">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="3"/>
+                                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>İşlevsellik Çerezleri</h4>
+                                <span class="cookie-category-badge optional">İzne Tabi</span>
+                            </div>
+                        </div>
+                        <div class="cookie-toggle">
+                            <input type="checkbox" id="cookieFunctional">
+                            <label for="cookieFunctional"></label>
+                        </div>
+                    </div>
+                    <p class="cookie-category-desc">Bu çerezler, dil tercihi veya tema seçimi gibi gelişmiş işlevsellik ve kişiselleştirme sağlar. Tercihlerinizi hatırlayarak daha iyi bir deneyim sunar.</p>
+                </div>
+
+                <!-- Pazarlama Çerezleri -->
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <div class="cookie-category-info">
+                            <div class="cookie-category-icon marketing">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>Pazarlama Çerezleri</h4>
+                                <span class="cookie-category-badge optional">İzne Tabi</span>
+                            </div>
+                        </div>
+                        <div class="cookie-toggle">
+                            <input type="checkbox" id="cookieMarketing">
+                            <label for="cookieMarketing"></label>
+                        </div>
+                    </div>
+                    <p class="cookie-category-desc">Bu çerezler, reklam ortaklarımız tarafından ilgi alanlarınıza uygun reklamlar göstermek için kullanılır. Ayrıca reklam kampanyalarının etkinliğini ölçmeye yardımcı olur.</p>
+                </div>
+            </div>
+
+            <div class="cookie-prefs-footer">
+                <div class="cookie-prefs-footer-links">
+                    <a href="cerez-politikasi/">Çerez Politikası</a>
+                    <a href="gizlilik-politikasi/">Gizlilik Politikası</a>
+                </div>
+                <div class="cookie-prefs-footer-buttons">
+                    <button class="btn btn-secondary" onclick="rejectAllCookies()">Tümünü Reddet</button>
+                    <button class="btn btn-primary" onclick="savePreferences()">Tercihleri Kaydet</button>
+                </div>
             </div>
         </div>
     </div>
