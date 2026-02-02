@@ -399,15 +399,61 @@ let surveyState = {
 // n8n webhook URL'inizi buraya ekleyin
 const SURVEY_WEBHOOK_URL = 'https://n8n.carettask.com/webhook/carettask-survey';
 
+// Normalize profile-specific answers to unified column names
+function normalizeAnswers(answers) {
+    const profile = answers['profile'] || 'unknown';
+
+    // Profile suffixes mapping
+    const profileSuffixes = {
+        'tech-lead': 'tech',
+        'entrepreneur': 'entrepreneur',
+        'academic': 'academic',
+        'corporate': 'corporate',
+        'student': 'student',
+        'creative': 'creative'
+    };
+
+    const suffix = profileSuffixes[profile] || profile;
+
+    return {
+        profile: profile,
+        behavior: answers['behavior'] || '',
+        content_selections: answers[`content-${suffix}`] || [],
+        view_preferences: answers[`view-${suffix}`] || [],
+        tools_used: answers[`tools-${suffix}`] || [],
+        essential_features: answers['essential-features'] || [],
+        pain_points: answers['pain-points'] || [],
+        pain_detail: answers['pain-detail'] || '',
+        dream_features: answers['dream-features'] || [],
+        // Non-note-taker specific fields
+        barrier: answers['barrier'] || [],
+        pain_recognition: answers['pain-recognition'] || '',
+        persuasion: answers['persuasion'] || [],
+        email: answers['email'] || 'skipped'
+    };
+}
+
 // Submit survey data to webhook
 async function submitSurveyToWebhook() {
-    const profile = surveyState.answers['profile'] || 'unknown';
+    // Normalize answers to unified column names
+    const normalizedAnswers = normalizeAnswers(surveyState.answers);
 
     const surveyData = {
-        email: surveyState.answers['email'] || 'not_provided',
-        profile: profile,
-        behavior: surveyState.answers['behavior'] || 'unknown',
-        answers: { ...surveyState.answers },
+        email: normalizedAnswers.email,
+        profile: normalizedAnswers.profile,
+        behavior: normalizedAnswers.behavior,
+        content_selections: normalizedAnswers.content_selections,
+        view_preferences: normalizedAnswers.view_preferences,
+        tools_used: normalizedAnswers.tools_used,
+        essential_features: normalizedAnswers.essential_features,
+        pain_points: normalizedAnswers.pain_points,
+        pain_detail: normalizedAnswers.pain_detail,
+        dream_features: normalizedAnswers.dream_features,
+        barrier: normalizedAnswers.barrier,
+        pain_recognition: normalizedAnswers.pain_recognition,
+        persuasion: normalizedAnswers.persuasion,
+        // Keep raw answers for debugging
+        raw_answers: { ...surveyState.answers },
         submittedAt: new Date().toISOString(),
         userAgent: navigator.userAgent,
         screenSize: `${window.innerWidth}x${window.innerHeight}`,
