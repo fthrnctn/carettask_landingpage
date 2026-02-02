@@ -160,11 +160,17 @@ function rejectAllCookies() {
 // Apply cookie preferences (enable/disable tracking)
 function applyCookiePreferences(prefs) {
     if (prefs.analytics) {
-        // Initialize analytics (Google Analytics, etc.)
+        // Initialize CaretTask Analytics
         console.log('Analytics cookies enabled');
+        if (window.CaretTaskAnalytics) {
+            window.CaretTaskAnalytics.start();
+        }
     } else {
-        // Disable/remove analytics
+        // Disable analytics
         console.log('Analytics cookies disabled');
+        if (window.CaretTaskAnalytics) {
+            window.CaretTaskAnalytics.stop();
+        }
     }
 
     if (prefs.functional) {
