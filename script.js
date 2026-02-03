@@ -372,11 +372,66 @@ if (heroSection) {
 }
 
 // Auth Modal Functions
+function getSubmittedEmails() {
+    const emails = localStorage.getItem('carettask_submitted_emails');
+    return emails ? JSON.parse(emails) : [];
+}
+
+function saveSubmittedEmail(email) {
+    const emails = getSubmittedEmails();
+    if (!emails.includes(email)) {
+        emails.push(email);
+        localStorage.setItem('carettask_submitted_emails', JSON.stringify(emails));
+    }
+}
+
+function resetAuthModalContent() {
+    const content = document.querySelector('.auth-modal-content, .auth-success-content');
+    if (content) {
+        content.className = 'auth-modal-content';
+        content.innerHTML = `
+            <div class="auth-icon">🚀</div>
+            <h4>CaretTask Yakında Yayında!</h4>
+            <p>Uygulamamız şu anda geliştirme aşamasında. Yayına çıktığında ve önemli gelişmelerden sizi haberdar edelim mi?</p>
+            <input type="email" id="authEmailInput" class="auth-email-input" placeholder="E-posta adresiniz">
+            <div id="authEmailError" class="auth-email-error"></div>
+            <button class="auth-submit-btn" onclick="submitAuthEmail()">Beni Haberdar Et</button>
+            <p class="auth-privacy-note">E-postanızı yalnızca CaretTask ile ilgili önemli güncellemeler için kullanacağız.</p>
+        `;
+    }
+}
+
+function showAlreadySubscribedState() {
+    const content = document.querySelector('.auth-modal-content, .auth-success-content');
+    if (content) {
+        const emails = getSubmittedEmails();
+        const lastEmail = emails[emails.length - 1];
+        content.className = 'auth-success-content';
+        content.innerHTML = `
+            <div class="auth-success-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#334E68" stroke-width="2.5">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+            </div>
+            <h2>Zaten Kayıtlısınız!</h2>
+            <p><strong>${lastEmail}</strong> adresi ile daha önce kayıt oldunuz. CaretTask yayına girdiğinde sizi haberdar edeceğiz.</p>
+            <button class="auth-success-btn" onclick="closeAuthModal()">Tamam, Kapat</button>
+            <button class="auth-add-another-btn" onclick="showAddAnotherEmail()">Başka Mail Ekle</button>
+        `;
+    }
+}
+
+function showAddAnotherEmail() {
+    resetAuthModalContent();
+    setTimeout(() => {
+        const emailInput = document.getElementById('authEmailInput');
+        if (emailInput) emailInput.focus();
+    }, 100);
+}
+
 function openAuthModal(type) {
     const modal = document.getElementById('authModal');
     const title = document.getElementById('authModalTitle');
-    const emailInput = document.getElementById('authEmailInput');
-    const errorDiv = document.getElementById('authEmailError');
 
     // Set title based on type
     if (type === 'login') {
@@ -385,16 +440,23 @@ function openAuthModal(type) {
         title.textContent = 'Ücretsiz Başlayın';
     }
 
-    // Reset form
-    emailInput.value = '';
-    errorDiv.textContent = '';
+    // Check if user already submitted email
+    const submittedEmails = getSubmittedEmails();
+    if (submittedEmails.length > 0) {
+        showAlreadySubscribedState();
+    } else {
+        resetAuthModalContent();
+    }
 
     // Show modal
     modal.classList.add('show');
     document.body.style.overflow = 'hidden';
 
-    // Focus email input
-    setTimeout(() => emailInput.focus(), 300);
+    // Focus email input if form is shown
+    setTimeout(() => {
+        const emailInput = document.getElementById('authEmailInput');
+        if (emailInput) emailInput.focus();
+    }, 300);
 
     // Close on overlay click
     modal.onclick = function(e) {
@@ -441,6 +503,9 @@ function submitAuthEmail() {
     // Clear error
     errorDiv.textContent = '';
 
+    // Save email to localStorage
+    saveSubmittedEmail(email);
+
     // Here you would typically send the email to your backend
     console.log('Email submitted:', email);
 
@@ -456,5 +521,6 @@ function submitAuthEmail() {
         <h2>Teşekkürler!</h2>
         <p>E-posta adresiniz kaydedildi. CaretTask yayına girdiğinde sizi haberdar edeceğiz.</p>
         <button class="auth-success-btn" onclick="closeAuthModal()">Tamam, Kapat</button>
+        <button class="auth-add-another-btn" onclick="showAddAnotherEmail()">Başka Mail Ekle</button>
     `;
 }

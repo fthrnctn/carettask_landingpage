@@ -1335,6 +1335,24 @@ img {
     color: var(--color-primary-dark);
 }
 
+.auth-add-another-btn {
+    margin-top: 12px;
+    padding: 10px 24px;
+    background: transparent;
+    color: var(--color-text-secondary);
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.auth-add-another-btn:hover {
+    color: var(--color-primary);
+    background: var(--color-bg-secondary);
+}
+
 /* Survey Modal */
 .survey-modal {
     width: 100%;
