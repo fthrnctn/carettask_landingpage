@@ -31,9 +31,10 @@
     <!-- Theme Color -->
     <meta name="theme-color" content="#334E68">
 
-    <!-- Preconnect -->
+    <!-- Preconnect for Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
 
     <!-- Stylesheets -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -43,102 +44,100 @@
     <!-- Header -->
     <header class="header">
         <div class="header-container">
-            <a href="../" class="logo">CaretTask</a>
-            <nav class="nav-links">
-                <a href="../#features">Özellikler</a>
-                <a href="../#faq">SSS</a>
-            </nav>
+            <div class="header-left">
+                <a href="../" class="logo">CaretTask</a>
+                <nav class="nav-links">
+                    <a href="../#ozellikler">Özellikler</a>
+                    <a href="../#sss">SSS</a>
+                </nav>
+            </div>
             <div class="header-buttons">
-                <button class="btn btn-ghost">Giriş Yap</button>
-                <button class="btn btn-primary">Ücretsiz Başla</button>
+                <button class="btn btn-ghost" onclick="openAuthModal('login')">Giriş Yap</button>
+                <button class="btn btn-primary" onclick="openAuthModal('signup')">Ücretsiz Başla</button>
             </div>
         </div>
     </header>
 
-    <!-- Page Header -->
-    <section class="legal-header">
-        <div class="legal-header-content">
-            <nav class="breadcrumb">
-                <a href="../">Ana Sayfa</a>
-                <svg class="breadcrumb-separator" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-                <span class="breadcrumb-current">Kullanım Şartları</span>
-            </nav>
-            <span class="legal-badge">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                    <polyline points="14 2 14 8 20 8"></polyline>
-                    <line x1="16" y1="13" x2="8" y2="13"></line>
-                    <line x1="16" y1="17" x2="8" y2="17"></line>
-                    <polyline points="10 9 9 9 8 9"></polyline>
-                </svg>
-                Yasal Belge
-            </span>
-            <h1>Kullanım Şartları</h1>
-            <p class="legal-last-updated">Son Güncelleme: Ocak 2025</p>
-            <p class="legal-effective-date">Yürürlük Tarihi: 1 Ocak 2025</p>
-        </div>
-    </section>
 
-    <!-- Content -->
-    <section class="legal-content">
-        <div class="legal-content-inner">
+    <!-- Legal Page Container -->
+    <section class="legal-page">
+        <div class="legal-page-container">
+            <!-- Back Link -->
+            <a href="{{BASE_PATH}}" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Ana Sayfaya Dön
+            </a>
+
+            <!-- Header Card -->
+            <div class="legal-header-card">
+                <div class="legal-header-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#334e68" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <polyline points="14 2 14 8 20 8" stroke="#334e68" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <line x1="16" y1="13" x2="8" y2="13" stroke="#334e68" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="16" y1="17" x2="8" y2="17" stroke="#334e68" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="10" y1="9" x2="8" y2="9" stroke="#334e68" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h1>Kullanım Şartları</h1>
+                <p class="legal-last-updated">Son Güncelleme: Şubat 2026</p>
+            </div>
+
+            <!-- Content Card -->
+            <div class="legal-content-card">
 
             <!-- Acceptance Notice -->
-            <div class="legal-acceptance-box">
+            <div class="legal-note">
                 <p>Bu sayfayı okuyarak ve hizmetimizi kullanarak aşağıdaki şartları kabul etmiş olursunuz. Kabul etmiyorsanız, lütfen hizmeti kullanmayın.</p>
             </div>
 
-            <!-- Section 1 -->
-            <div class="legal-section-title">
-                <span class="section-number">1</span>
-                <span class="section-number-title">Giriş ve Kabul</span>
-            </div>
+            <h2>1. Giriş ve Kabul</h2>
             <p>CaretTask'a hoş geldiniz! Bu Kullanım Şartları ("Şartlar"), CaretTask uygulamasını ve hizmetlerini ("Hizmet") kullanımınızı düzenler.</p>
             <p>Hizmetimizi kullanarak, bu Şartları okuduğunuzu, anladığınızı ve kabul ettiğinizi beyan etmiş olursunuz. Bu Şartları kabul etmiyorsanız, lütfen Hizmeti kullanmayın.</p>
-
             <div class="legal-note">
-                <p>Bu Şartlar, sizinle CaretTask arasında bağlayıcı bir sözleşme oluşturur. Lütfen dikkatlice okuyun.</p>
+                <p><strong>Önemli:</strong> Bu Şartlar, sizinle CaretTask arasında bağlayıcı bir sözleşme oluşturur. Lütfen dikkatlice okuyun.</p>
             </div>
 
-            <!-- Section 2 -->
-            <div class="legal-section-title">
-                <span class="section-number">2</span>
-                <span class="section-number-title">Tanımlar</span>
-            </div>
+            <hr class="legal-divider">
+
+            <h2>2. Tanımlar</h2>
             <p>Bu Şartlarda geçen terimler:</p>
+            <table class="legal-table legal-table-styled">
+                <thead>
+                    <tr>
+                        <th>Terim</th>
+                        <th>Açıklama</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>"CaretTask" veya "Biz"</td>
+                        <td>CaretTask uygulamasını ve hizmetlerini sağlayan kuruluşu ifade eder.</td>
+                    </tr>
+                    <tr>
+                        <td>"Kullanıcı" veya "Siz"</td>
+                        <td>Hizmeti kullanan gerçek veya tüzel kişiyi ifade eder.</td>
+                    </tr>
+                    <tr>
+                        <td>"Hizmet"</td>
+                        <td>CaretTask uygulaması, web sitesi ve ilgili tüm özellikleri ifade eder.</td>
+                    </tr>
+                    <tr>
+                        <td>"İçerik"</td>
+                        <td>Hizmet üzerinden iletilen veya saklanan tüm veri, metin, görev, not ve diğer materyalleri ifade eder.</td>
+                    </tr>
+                    <tr>
+                        <td>"Hesap"</td>
+                        <td>Hizmete erişim için oluşturduğunuz kullanıcı hesabını ifade eder.</td>
+                    </tr>
+                </tbody>
+            </table>
 
-            <div class="definition-box">
-                <p class="definition-term">"CaretTask" veya "Biz"</p>
-                <p class="definition-description">CaretTask uygulamasını ve hizmetlerini sağlayan kuruluşu ifade eder.</p>
-            </div>
+            <hr class="legal-divider">
 
-            <div class="definition-box">
-                <p class="definition-term">"Kullanıcı" veya "Siz"</p>
-                <p class="definition-description">Hizmeti kullanan gerçek veya tüzel kişiyi ifade eder.</p>
-            </div>
-
-            <div class="definition-box">
-                <p class="definition-term">"Hizmet"</p>
-                <p class="definition-description">CaretTask uygulaması, web sitesi ve ilgili tüm özellikleri ifade eder.</p>
-            </div>
-
-            <div class="definition-box">
-                <p class="definition-term">"İçerik"</p>
-                <p class="definition-description">Hizmet üzerinden iletilen veya saklanan tüm veri, metin, görev, not ve diğer materyalleri ifade eder.</p>
-            </div>
-
-            <div class="definition-box">
-                <p class="definition-term">"Hesap"</p>
-                <p class="definition-description">Hizmete erişim için oluşturduğunuz kullanıcı hesabını ifade eder.</p>
-            </div>
-
-            <!-- Section 3 -->
-            <div class="legal-section-title">
-                <span class="section-number">3</span>
-                <span class="section-number-title">Hesap Oluşturma ve Güvenlik</span>
-            </div>
+            <h2>3. Hesap Oluşturma ve Güvenlik</h2>
 
             <h3>3.1 Hesap Gereksinimleri</h3>
             <p>Hizmeti kullanmak için bir hesap oluşturmanız gerekmektedir. Hesap oluştururken:</p>
@@ -155,14 +154,8 @@
                 <li>Hesabınızı başkasıyla paylaşmamalısınız</li>
                 <li>Yetkisiz erişim durumunda bizi derhal bilgilendirmelisiniz</li>
             </ul>
-
-            <div class="legal-alert warning">
-                <svg class="alert-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
-                    <line x1="12" y1="9" x2="12" y2="13"></line>
-                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                </svg>
-                <p>Hesabınızda gerçekleşen tüm işlemlerden siz sorumlusunuz. Şifrenizi güçlü seçin ve kimseyle paylaşmayın.</p>
+            <div class="legal-note">
+                <p><strong>Uyarı:</strong> Hesabınızda gerçekleşen tüm işlemlerden siz sorumlusunuz. Şifrenizi güçlü seçin ve kimseyle paylaşmayın.</p>
             </div>
 
             <h3>3.3 Hesap Askıya Alma ve Silme</h3>
@@ -174,11 +167,9 @@
                 <li>Yasal zorunluluklar gerektirdiğinde</li>
             </ul>
 
-            <!-- Section 4 -->
-            <div class="legal-section-title">
-                <span class="section-number">4</span>
-                <span class="section-number-title">Hizmetin Kullanımı</span>
-            </div>
+            <hr class="legal-divider">
+
+            <h2>4. Hizmetin Kullanımı</h2>
 
             <h3>4.1 Lisans</h3>
             <p>Size, bu Şartlara uygun olarak Hizmeti kullanmak için sınırlı, müşterek olmayan, devredilemez ve geri alınabilir bir lisans veriyoruz.</p>
@@ -203,21 +194,13 @@
                 <li>Hizmetin normal işleyişini bozmaya çalışma</li>
                 <li>Tersine mühendislik veya kaynak kodunu çıkarma girişimlerinde bulunma</li>
             </ul>
-
-            <div class="legal-alert danger">
-                <svg class="alert-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="12" y1="8" x2="12" y2="12"></line>
-                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                </svg>
-                <p>Bu yasakların ihlali, hesabınızın derhal askıya alınmasına veya silinmesine neden olabilir. Yasal işlem başlatma hakkımız saklıdır.</p>
+            <div class="legal-note">
+                <p><strong>Dikkat:</strong> Bu yasakların ihlali, hesabınızın derhal askıya alınmasına veya silinmesine neden olabilir. Yasal işlem başlatma hakkımız saklıdır.</p>
             </div>
 
-            <!-- Section 5 -->
-            <div class="legal-section-title">
-                <span class="section-number">5</span>
-                <span class="section-number-title">İçerik ve Fikri Mülkiyet</span>
-            </div>
+            <hr class="legal-divider">
+
+            <h2>5. İçerik ve Fikri Mülkiyet</h2>
 
             <h3>5.1 Sizin İçerikleriniz</h3>
             <p>Hizmete yüklediğiniz veya oluşturduğunuz tüm içeriklerin ("Kullanıcı İçeriği") mülkiyeti size aittir. Ancak bize şu hakları verirsiniz:</p>
@@ -239,11 +222,9 @@
             <h3>5.3 Geri Bildirim</h3>
             <p>Bize gönderdiğiniz öneri ve geri bildirimler, tazminat olmaksızın kullanılabilir.</p>
 
-            <!-- Section 6 -->
-            <div class="legal-section-title">
-                <span class="section-number">6</span>
-                <span class="section-number-title">Ücretler ve Ödemeler</span>
-            </div>
+            <hr class="legal-divider">
+
+            <h2>6. Ücretler ve Ödemeler</h2>
 
             <h3>6.1 Ücretsiz Hizmet</h3>
             <p>CaretTask şu an için ücretsiz olarak sunulmaktadır.</p>
@@ -256,23 +237,32 @@
                 <li>Ücretlendirme şartları ayrı bir sözleşmeyle belirlenecektir</li>
             </ul>
 
-            <!-- Section 7 -->
-            <div class="legal-section-title">
-                <span class="section-number">7</span>
-                <span class="section-number-title">Gizlilik</span>
-            </div>
+            <hr class="legal-divider">
+
+            <h2>7. Gizlilik ve Analitik</h2>
             <p>Kişisel verilerinizin işlenmesi, Gizlilik Politikamız ve KVKK Aydınlatma Metnimiz kapsamında gerçekleştirilir. Hizmeti kullanarak, bu politikaları da kabul etmiş sayılırsınız.</p>
+
+            <h3>7.1 Analitik Veri Toplama</h3>
+            <p>Web sitemizde, hizmet kalitesini artırmak amacıyla analitik veriler toplanabilir. Analitik çerezleri kabul etmeniz halinde aşağıdaki veriler toplanır:</p>
+            <ul>
+                <li>Sayfa görüntülenmeleri ve ziyaret edilen sayfalar</li>
+                <li>Tıklanan buton ve bağlantılar</li>
+                <li>Sayfa kaydırma derinliği ve oturum süresi</li>
+                <li>Cihaz ve tarayıcı bilgileri</li>
+            </ul>
+            <p>Bu veriler, Google Analytics ve kendi analitik sistemimiz (CaretTask Analytics) aracılığıyla toplanır. Çerez tercihlerinizi çerez banner'ından dilediğiniz zaman değiştirebilirsiniz.</p>
+
+            <h3>7.2 Detaylı Bilgi</h3>
             <p>Detaylar için:</p>
             <ul>
-                <li><a href="../gizlilik-politikasi/">Gizlilik Politikası</a></li>
-                <li><a href="../kvkk/">KVKK Aydınlatma Metni</a></li>
+                <li><a href="{{BASE_PATH}}gizlilik-politikasi/">Gizlilik Politikası</a></li>
+                <li><a href="{{BASE_PATH}}kvkk/">KVKK Aydınlatma Metni</a></li>
+                <li><a href="{{BASE_PATH}}cerez-politikasi/">Çerez Politikası</a></li>
             </ul>
 
-            <!-- Section 8 -->
-            <div class="legal-section-title">
-                <span class="section-number">8</span>
-                <span class="section-number-title">Sorumluluk Sınırlaması</span>
-            </div>
+            <hr class="legal-divider">
+
+            <h2>8. Sorumluluk Sınırlaması</h2>
 
             <h3>8.1 Hizmetin Sunumu</h3>
             <p>Hizmet "olduğu gibi" ve "mevcut olduğu şekilde" sunulmaktadır. Aşağıdaki konularda garanti vermiyoruz:</p>
@@ -289,19 +279,16 @@
                 <li>Kâr kaybı veya iş kaybı</li>
                 <li>Veri kaybı (kendi yedeklemeleriniz dışında)</li>
             </ul>
-
             <div class="legal-note">
-                <p>Verilerinizi düzenli olarak yedeklemenizi öneririz. Veri kayıplarına karşı nihai sorumluluk size aittir.</p>
+                <p><strong>Öneri:</strong> Verilerinizi düzenli olarak yedeklemenizi öneririz. Veri kayıplarına karşı nihai sorumluluk size aittir.</p>
             </div>
 
             <h3>8.3 Tazminat</h3>
             <p>Bu Şartları ihlal etmenizden kaynaklanan tüm talep, zarar ve masraflara karşı bizi tazmin etmeyi kabul edersiniz.</p>
 
-            <!-- Section 9 -->
-            <div class="legal-section-title">
-                <span class="section-number">9</span>
-                <span class="section-number-title">Hizmet Değişiklikleri ve Sonlandırma</span>
-            </div>
+            <hr class="legal-divider">
+
+            <h2>9. Hizmet Değişiklikleri ve Sonlandırma</h2>
 
             <h3>9.1 Hizmet Değişiklikleri</h3>
             <p>Hizmeti istediğimiz zaman değiştirme, güncelleme veya durdurma hakkını saklı tutarız. Önemli değişiklikler için makul bir bildirim süresi tanıyacağız.</p>
@@ -322,11 +309,9 @@
                 <li>Hizmetin kaldırılması</li>
             </ul>
 
-            <!-- Section 10 -->
-            <div class="legal-section-title">
-                <span class="section-number">10</span>
-                <span class="section-number-title">Uyuşmazlık Çözümü</span>
-            </div>
+            <hr class="legal-divider">
+
+            <h2>10. Uyuşmazlık Çözümü</h2>
 
             <h3>10.1 Uygulanacak Hukuk</h3>
             <p>Bu Şartlar, Türkiye Cumhuriyeti hukukuna tabidir.</p>
@@ -337,11 +322,9 @@
             <h3>10.3 Dostane Çözüm</h3>
             <p>Herhangi bir uyuşmazlık durumunda, öncelikle dostane bir çözüm bulmaya çalışmamızı tercih ediyoruz. Lütfen öncelikle bizimle iletişime geçin.</p>
 
-            <!-- Section 11 -->
-            <div class="legal-section-title">
-                <span class="section-number">11</span>
-                <span class="section-number-title">Genel Hükümler</span>
-            </div>
+            <hr class="legal-divider">
+
+            <h2>11. Genel Hükümler</h2>
 
             <h3>11.1 Bütünlük</h3>
             <p>Bu Şartlar, sizinle aramızda yapılan tam sözleşmeyi oluşturur ve önceki tüm anlaşmaların yerine geçer.</p>
@@ -355,39 +338,28 @@
             <h3>11.4 Devir</h3>
             <p>Bu Şartları bizim iznimiz olmadan devredemezsiniz. Biz, Şartları herhangi bir kısıtlama olmaksızın devredebiliriz.</p>
 
-            <!-- Section 12 -->
-            <div class="legal-section-title">
-                <span class="section-number">12</span>
-                <span class="section-number-title">Şartlarda Değişiklik</span>
-            </div>
+            <hr class="legal-divider">
+
+            <h2>12. Şartlarda Değişiklik</h2>
             <p>Bu Şartları zaman zaman güncelleyebiliriz. Değişiklikler yapıldığında:</p>
             <ul>
                 <li>Yürürlük tarihini güncelleyeceğiz</li>
                 <li>Web sitemizde yayınlayacağız</li>
                 <li>Önemli değişikliklerde e-posta ile bildireceğiz</li>
             </ul>
-
-            <div class="legal-alert warning">
-                <svg class="alert-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
-                    <line x1="12" y1="9" x2="12" y2="13"></line>
-                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                </svg>
-                <p>Değişikliklerden sonra Hizmeti kullanmaya devam etmeniz, yeni Şartları kabul ettiğiniz anlamına gelir.</p>
+            <div class="legal-note">
+                <p><strong>Önemli:</strong> Değişikliklerden sonra Hizmeti kullanmaya devam etmeniz, yeni Şartları kabul ettiğiniz anlamına gelir.</p>
             </div>
 
-            <!-- Section 13 -->
-            <div class="legal-section-title">
-                <span class="section-number">13</span>
-                <span class="section-number-title">İletişim</span>
-            </div>
+            <hr class="legal-divider">
+
+            <h2>13. İletişim</h2>
             <p>Bu Kullanım Şartları hakkında sorularınız için:</p>
-
             <div class="legal-contact-card">
                 <p><strong>E-posta:</strong> <a href="mailto:info@carettask.com">info@carettask.com</a></p>
-                <p><strong>Web Sitesi:</strong> <a href="https://www.carettask.com">www.carettask.com</a></p>
             </div>
 
+            </div>
         </div>
     </section>
 
@@ -396,40 +368,44 @@
         <div class="footer-container">
             <div class="footer-main">
                 <div class="footer-brand">
-                    <span class="footer-logo">CaretTask</span>
-                    <p>Görev yönetiminin en akıllı yolu. Projelerinizi ve görevlerinizi kolayca yönetin.</p>
+                    <h4>CaretTask</h4>
+                    <p>Görevlerinizi akışa bırakın.</p>
                     <div class="social-links">
-                        <a href="https://instagram.com/caretta.task" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        <a href="https://instagram.com/caretta.task" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/>
+                                <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/>
+                                <circle cx="18" cy="6" r="1" fill="currentColor"/>
                             </svg>
                         </a>
-                        <a href="https://x.com/carettask" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        <a href="https://x.com/carettask" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="X (Twitter)">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 4L10.5 12.5M20 20L13.5 11.5M10.5 12.5L4 20H8L13.5 11.5M10.5 12.5L16 4H20L13.5 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link disabled" aria-label="LinkedIn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <rect x="2" y="9" width="4" height="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link disabled" aria-label="GitHub">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </a>
                     </div>
                 </div>
-                <div class="footer-links-grid">
-                    <div class="footer-links-column">
-                        <h4>Ürün</h4>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h5>ÜRÜN</h5>
                         <ul>
-                            <li><a href="../#features">Özellikler</a></li>
-                            <li><a href="../#faq">Sıkça Sorulanlar</a></li>
+                            <li><a href="../#ozellikler">Özellikler</a></li>
                         </ul>
                     </div>
-                    <div class="footer-links-column">
-                        <h4>İletişim</h4>
-                        <ul>
-                            <li><a href="https://instagram.com/caretta.task" target="_blank" rel="noopener noreferrer">@caretta.task</a></li>
-                            <li><a href="https://x.com/carettask" target="_blank" rel="noopener noreferrer">@carettask</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-links-column">
-                        <h4>Yasal</h4>
+                    <div class="footer-column">
+                        <h5>YASAL</h5>
                         <ul>
                             <li><a href="../gizlilik-politikasi/">Gizlilik Politikası</a></li>
                             <li><a href="../kvkk/">KVKK Aydınlatma</a></li>
@@ -437,15 +413,358 @@
                             <li><a href="../kullanim-sartlari/">Kullanım Şartları</a></li>
                         </ul>
                     </div>
+                    <div class="footer-column">
+                        <h5>İLETİŞİM</h5>
+                        <ul>
+                            <li>
+                                <a href="https://instagram.com/caretta.task" target="_blank" rel="noopener noreferrer">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/>
+                                        <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/>
+                                        <circle cx="18" cy="6" r="1" fill="currentColor"/>
+                                    </svg>
+                                    @caretta.task
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://x.com/carettask" target="_blank" rel="noopener noreferrer">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M4 4L10.5 12.5M20 20L13.5 11.5M10.5 12.5L4 20H8L13.5 11.5M10.5 12.5L16 4H20L13.5 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    @carettask
+                                </a>
+                            </li>
+                            <li class="disabled">
+                                <a href="#">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <rect x="2" y="9" width="4" height="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    LinkedIn
+                                </a>
+                            </li>
+                            <li class="disabled">
+                                <a href="#">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    GitHub
+                                </a>
+                            </li>
+                            <li>
+                                <a href="mailto:info@carettask.com">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    info@carettask.com
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+            <div class="footer-divider"></div>
             <div class="footer-bottom">
-                <p>&copy; 2025 CaretTask. Tüm hakları saklıdır.</p>
+                <p>© 2026 CaretTask. Tüm hakları saklıdır.</p>
+                <button class="language-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/>
+                        <line x1="2" y1="12" x2="22" y2="12" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="currentColor" stroke-width="1.5"/>
+                    </svg>
+                    Türkçe
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <polyline points="6 9 12 15 18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
             </div>
         </div>
     </footer>
 
+
+    <!-- Cookie Banner -->
+    <div id="cookieBanner" class="cookie-banner">
+        <div class="cookie-container">
+            <div class="cookie-content">
+                <div class="cookie-header">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="#334E68" stroke-width="1.5"/>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" stroke="#334E68" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="12" cy="17" r="0.5" fill="#334E68" stroke="#334E68"/>
+                    </svg>
+                    <h4>Çerez ve Gizlilik Tercihleri</h4>
+                </div>
+                <p>Deneyiminizi kişiselleştirmek ve hizmetlerimizi geliştirmek için çerezler kullanıyoruz. Tercihlerinizi ayarlayabilir veya detaylı bilgi alabilirsiniz.</p>
+                <div class="cookie-links">
+                    <a href="../kvkk/">KVKK Aydınlatma Metni</a>
+                    <a href="../gizlilik-politikasi/">Gizlilik Politikası</a>
+                    <a href="../cerez-politikasi/">Çerez Politikası</a>
+                </div>
+            </div>
+            <div class="cookie-buttons">
+                <button class="btn btn-outline" id="managePrefs">Yönet</button>
+                <button class="btn btn-secondary" id="rejectCookies">Zorunlu</button>
+                <button class="btn btn-primary" id="acceptCookies">Kabul Et</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Preferences Modal -->
+    <div id="cookiePrefsModal" class="modal-overlay">
+        <div class="cookie-prefs-modal">
+            <div class="cookie-prefs-header">
+                <div class="cookie-prefs-title">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#334E68" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                    </svg>
+                    <h2>Çerez Tercihlerini Yönet</h2>
+                </div>
+                <button class="cookie-prefs-close" onclick="closeCookiePrefs()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="cookie-prefs-content">
+                <p class="cookie-prefs-intro">Aşağıdaki çerez kategorilerini açıp kapatarak tercihlerinizi özelleştirebilirsiniz. Zorunlu çerezler sitemizin düzgün çalışması için gereklidir ve kapatılamaz.</p>
+
+                <!-- Zorunlu Çerezler -->
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <div class="cookie-category-info">
+                            <div class="cookie-category-icon required">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>Zorunlu Çerezler</h4>
+                                <span class="cookie-category-badge required">Her Zaman Aktif</span>
+                            </div>
+                        </div>
+                        <div class="cookie-toggle disabled">
+                            <input type="checkbox" id="cookieNecessary" checked disabled>
+                            <label for="cookieNecessary"></label>
+                        </div>
+                    </div>
+                    <p class="cookie-category-desc">Bu çerezler web sitesinin temel işlevlerini sağlar ve devre dışı bırakılamaz. Genellikle gizlilik tercihlerinizi ayarlamak, oturum açmak veya form doldurmak gibi hizmet taleplerine yanıt olarak ayarlanır.</p>
+                </div>
+
+                <!-- Analitik Çerezler -->
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <div class="cookie-category-info">
+                            <div class="cookie-category-icon analytics">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="20" x2="18" y2="10"/>
+                                    <line x1="12" y1="20" x2="12" y2="4"/>
+                                    <line x1="6" y1="20" x2="6" y2="14"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>Analitik Çerezler</h4>
+                                <span class="cookie-category-badge optional">İzne Tabi</span>
+                            </div>
+                        </div>
+                        <div class="cookie-toggle">
+                            <input type="checkbox" id="cookieAnalytics">
+                            <label for="cookieAnalytics"></label>
+                        </div>
+                    </div>
+                    <p class="cookie-category-desc">Bu çerezler, ziyaretçilerin web sitesiyle nasıl etkileşime girdiğini anlamamıza yardımcı olur. Ziyaretçi sayısı, hemen çıkma oranı ve trafik kaynakları gibi bilgiler toplar.</p>
+                </div>
+
+                <!-- İşlevsellik Çerezleri -->
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <div class="cookie-category-info">
+                            <div class="cookie-category-icon functional">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="3"/>
+                                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>İşlevsellik Çerezleri</h4>
+                                <span class="cookie-category-badge optional">İzne Tabi</span>
+                            </div>
+                        </div>
+                        <div class="cookie-toggle">
+                            <input type="checkbox" id="cookieFunctional">
+                            <label for="cookieFunctional"></label>
+                        </div>
+                    </div>
+                    <p class="cookie-category-desc">Bu çerezler, dil tercihi veya tema seçimi gibi gelişmiş işlevsellik ve kişiselleştirme sağlar. Tercihlerinizi hatırlayarak daha iyi bir deneyim sunar.</p>
+                </div>
+
+                <!-- Pazarlama Çerezleri -->
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <div class="cookie-category-info">
+                            <div class="cookie-category-icon marketing">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>Pazarlama Çerezleri</h4>
+                                <span class="cookie-category-badge optional">İzne Tabi</span>
+                            </div>
+                        </div>
+                        <div class="cookie-toggle">
+                            <input type="checkbox" id="cookieMarketing">
+                            <label for="cookieMarketing"></label>
+                        </div>
+                    </div>
+                    <p class="cookie-category-desc">Bu çerezler, reklam ortaklarımız tarafından ilgi alanlarınıza uygun reklamlar göstermek için kullanılır. Ayrıca reklam kampanyalarının etkinliğini ölçmeye yardımcı olur.</p>
+                </div>
+            </div>
+
+            <div class="cookie-prefs-footer">
+                <div class="cookie-prefs-footer-links">
+                    <a href="../cerez-politikasi/">Çerez Politikası</a>
+                    <a href="../gizlilik-politikasi/">Gizlilik Politikası</a>
+                </div>
+                <div class="cookie-prefs-footer-buttons">
+                    <button class="btn btn-secondary" onclick="rejectAllCookies()">Tümünü Reddet</button>
+                    <button class="btn btn-primary" onclick="savePreferences()">Tercihleri Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- KVKK Modal -->
+    <div id="kvkkModal" class="modal-overlay">
+        <div class="kvkk-modal">
+            <div class="kvkk-header">
+                <div class="kvkk-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#334E68" stroke-width="1.5">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        <polyline points="9 12 11 14 15 10"/>
+                    </svg>
+                </div>
+                <h2>Kişisel Verilerin Korunması Hakkında Aydınlatma</h2>
+                <p>6698 Sayılı KVKK Kapsamında Bilgilendirme</p>
+                <button class="kvkk-close-btn" onclick="closeKVKKModal()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="kvkk-content">
+                <div class="kvkk-section">
+                    <h3>1. Veri Sorumlusu</h3>
+                    <p>CaretTask ("Uygulama") adına kişisel verileriniz, veri sorumlusu sıfatıyla CaretTask ekibi tarafından aşağıda açıklanan amaçlar ve hukuki sebeplerle işlenmektedir.</p>
+                </div>
+                <div class="kvkk-section">
+                    <h3>2. İşlenen Kişisel Veriler</h3>
+                    <p>Bu anket kapsamında aşağıdaki kişisel verileriniz işlenecektir:</p>
+                    <ul>
+                        <li><strong>Kimlik Bilgileri:</strong> Adınız (isteğe bağlı)</li>
+                        <li><strong>İletişim Bilgileri:</strong> E-posta adresiniz</li>
+                        <li><strong>Anket Yanıtları:</strong> Profil seçiminiz, görev yönetim alışkanlıklarınız, tercihleriniz ve geri bildirimleriniz</li>
+                    </ul>
+                </div>
+                <div class="kvkk-section">
+                    <h3>3. Kişisel Verilerin İşlenme Amaçları</h3>
+                    <p>Toplanan kişisel verileriniz aşağıdaki amaçlarla işlenecektir:</p>
+                    <ul>
+                        <li>Kullanıcı ihtiyaçlarını ve beklentilerini anlamak</li>
+                        <li>CaretTask uygulamasını geliştirmek ve iyileştirmek</li>
+                        <li>Hedef kitle analizi yapmak</li>
+                        <li>Uygulama yayına alındığında sizi bilgilendirmek</li>
+                        <li>Anonim istatistiksel analizler gerçekleştirmek</li>
+                    </ul>
+                </div>
+                <div class="kvkk-section">
+                    <h3>4. Kişisel Verilerin İşlenmesinin Hukuki Sebebi</h3>
+                    <p>Kişisel verileriniz, 6698 sayılı Kanun'un 5. maddesi 1. fıkrası kapsamında açık rızanıza dayanarak işlenecektir.</p>
+                </div>
+                <div class="kvkk-section">
+                    <h3>5. Kişisel Verilerin Aktarımı</h3>
+                    <p>Kişisel verileriniz; yasal zorunluluklar haricinde üçüncü taraflarla paylaşılmayacaktır. Anket yanıtları yalnızca CaretTask geliştirme ekibi tarafından anonim olarak analiz edilecektir.</p>
+                </div>
+                <div class="kvkk-section">
+                    <h3>6. Kişisel Verilerin Saklanma Süresi</h3>
+                    <p>Kişisel verileriniz, işleme amacının gerektirdiği süre boyunca saklanacak ve işleme amacı ortadan kalktığında silinecek veya anonim hale getirilecektir.</p>
+                </div>
+                <div class="kvkk-section">
+                    <h3>7. KVKK Kapsamındaki Haklarınız</h3>
+                    <p>6698 sayılı Kanun'un 11. maddesi uyarınca aşağıdaki haklara sahipsiniz:</p>
+                    <ul>
+                        <li>Kişisel verilerinizin işlenip işlenmediğini öğrenme</li>
+                        <li>İşlenmişse buna ilişkin bilgi talep etme</li>
+                        <li>İşleme amacını ve amacına uygun kullanılıp kullanılmadığını öğrenme</li>
+                        <li>Kişisel verilerin düzeltilmesini veya silinmesini isteme</li>
+                        <li>İşlemenin kısıtlanmasını isteme</li>
+                        <li>Verilerin üçüncü kişilere aktarılıp aktarılmadığını öğrenme</li>
+                    </ul>
+                </div>
+                <div class="kvkk-section">
+                    <h3>8. İletişim</h3>
+                    <p>KVKK kapsamındaki talepleriniz için: <a href="mailto:info@carettask.com">info@carettask.com</a></p>
+                </div>
+            </div>
+            <div class="kvkk-footer">
+                <div class="kvkk-checkbox-wrapper">
+                    <input type="checkbox" id="kvkkCheckbox" onchange="toggleKVKKAcceptBtn()">
+                    <label for="kvkkCheckbox">
+                        Yukarıdaki aydınlatma metnini okudum, anladım ve kişisel verilerimin belirtilen amaçlarla işlenmesine açık rıza veriyorum.
+                        <span class="required">*</span>
+                    </label>
+                </div>
+                <div id="kvkkError" class="kvkk-error">Devam etmek için aydınlatma metnini onaylamanız gerekmektedir.</div>
+                <div class="kvkk-buttons">
+                    <button class="btn btn-ghost" onclick="closeKVKKModal()">Vazgeç</button>
+                    <button class="btn btn-primary kvkk-accept-btn disabled" onclick="acceptKVKK()">Kabul Ediyorum ve Devam Et</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Survey Modal -->
+    <div id="surveyModal" class="modal-overlay">
+        <div class="survey-modal">
+            <div class="survey-modal-content">
+                <!-- Content will be rendered by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Auth Modal (Login/Signup) -->
+    <div id="authModal" class="modal-overlay">
+        <div class="auth-modal">
+            <div class="auth-modal-header">
+                <h3 id="authModalTitle">Ücretsiz Başlayın</h3>
+                <button class="auth-close-btn" onclick="closeAuthModal()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="auth-modal-content">
+                <div class="auth-icon">🚀</div>
+                <h4>CaretTask Yakında Yayında!</h4>
+                <p>Uygulamamız şu anda geliştirme aşamasında. Yayına çıktığında ve önemli gelişmelerden sizi haberdar edelim mi?</p>
+                <input type="email" id="authEmailInput" class="auth-email-input" placeholder="E-posta adresiniz">
+                <div id="authEmailError" class="auth-email-error"></div>
+                <button class="auth-submit-btn" onclick="submitAuthEmail()">Beni Haberdar Et</button>
+                <p class="auth-privacy-note">E-postanızı yalnızca CaretTask ile ilgili önemli güncellemeler için kullanacağız.</p>
+            </div>
+        </div>
+    </div>
+
+
     <script src="../analytics.js"></script>
     <script src="../script.js"></script>
+    
 </body>
 </html>

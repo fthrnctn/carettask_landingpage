@@ -1087,18 +1087,33 @@ function closeKVKKModal() {
     document.getElementById('kvkkModal').classList.remove('show');
     document.getElementById('kvkkCheckbox').checked = false;
     document.getElementById('kvkkError').style.display = 'none';
+    document.querySelector('.kvkk-accept-btn').classList.add('disabled');
     document.body.style.overflow = '';
+}
+
+function toggleKVKKAcceptBtn() {
+    const checkbox = document.getElementById('kvkkCheckbox');
+    const acceptBtn = document.querySelector('.kvkk-accept-btn');
+    const errorDiv = document.getElementById('kvkkError');
+
+    if (checkbox.checked) {
+        acceptBtn.classList.remove('disabled');
+        errorDiv.style.display = 'none';
+    } else {
+        acceptBtn.classList.add('disabled');
+    }
 }
 
 function acceptKVKK() {
     const checkbox = document.getElementById('kvkkCheckbox');
+    const acceptBtn = document.querySelector('.kvkk-accept-btn');
     const errorDiv = document.getElementById('kvkkError');
 
-    if (!checkbox.checked) {
+    if (!checkbox.checked || acceptBtn.classList.contains('disabled')) {
         errorDiv.style.display = 'block';
-        document.querySelector('.kvkk-accept-btn').classList.add('shake');
+        checkbox.classList.add('shake');
         setTimeout(() => {
-            document.querySelector('.kvkk-accept-btn').classList.remove('shake');
+            checkbox.classList.remove('shake');
         }, 500);
         return;
     }

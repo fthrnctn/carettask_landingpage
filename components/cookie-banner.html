@@ -1,0 +1,252 @@
+<!-- Cookie Banner -->
+    <div id="cookieBanner" class="cookie-banner">
+        <div class="cookie-container">
+            <div class="cookie-content">
+                <div class="cookie-header">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="#334E68" stroke-width="1.5"/>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" stroke="#334E68" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="12" cy="17" r="0.5" fill="#334E68" stroke="#334E68"/>
+                    </svg>
+                    <h4>Çerez ve Gizlilik Tercihleri</h4>
+                </div>
+                <p>Deneyiminizi kişiselleştirmek ve hizmetlerimizi geliştirmek için çerezler kullanıyoruz. Tercihlerinizi ayarlayabilir veya detaylı bilgi alabilirsiniz.</p>
+                <div class="cookie-links">
+                    <a href="{{BASE_PATH}}kvkk/">KVKK Aydınlatma Metni</a>
+                    <a href="{{BASE_PATH}}gizlilik-politikasi/">Gizlilik Politikası</a>
+                    <a href="{{BASE_PATH}}cerez-politikasi/">Çerez Politikası</a>
+                </div>
+            </div>
+            <div class="cookie-buttons">
+                <button class="btn btn-outline" id="managePrefs">Yönet</button>
+                <button class="btn btn-secondary" id="rejectCookies">Zorunlu</button>
+                <button class="btn btn-primary" id="acceptCookies">Kabul Et</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Preferences Modal -->
+    <div id="cookiePrefsModal" class="modal-overlay">
+        <div class="cookie-prefs-modal">
+            <div class="cookie-prefs-header">
+                <div class="cookie-prefs-title">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#334E68" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                    </svg>
+                    <h2>Çerez Tercihlerini Yönet</h2>
+                </div>
+                <button class="cookie-prefs-close" onclick="closeCookiePrefs()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="cookie-prefs-content">
+                <p class="cookie-prefs-intro">Aşağıdaki çerez kategorilerini açıp kapatarak tercihlerinizi özelleştirebilirsiniz. Zorunlu çerezler sitemizin düzgün çalışması için gereklidir ve kapatılamaz.</p>
+
+                <!-- Zorunlu Çerezler -->
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <div class="cookie-category-info">
+                            <div class="cookie-category-icon required">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>Zorunlu Çerezler</h4>
+                                <span class="cookie-category-badge required">Her Zaman Aktif</span>
+                            </div>
+                        </div>
+                        <div class="cookie-toggle disabled">
+                            <input type="checkbox" id="cookieNecessary" checked disabled>
+                            <label for="cookieNecessary"></label>
+                        </div>
+                    </div>
+                    <p class="cookie-category-desc">Bu çerezler web sitesinin temel işlevlerini sağlar ve devre dışı bırakılamaz. Genellikle gizlilik tercihlerinizi ayarlamak, oturum açmak veya form doldurmak gibi hizmet taleplerine yanıt olarak ayarlanır.</p>
+                </div>
+
+                <!-- Analitik Çerezler -->
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <div class="cookie-category-info">
+                            <div class="cookie-category-icon analytics">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="20" x2="18" y2="10"/>
+                                    <line x1="12" y1="20" x2="12" y2="4"/>
+                                    <line x1="6" y1="20" x2="6" y2="14"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>Analitik Çerezler</h4>
+                                <span class="cookie-category-badge optional">İzne Tabi</span>
+                            </div>
+                        </div>
+                        <div class="cookie-toggle">
+                            <input type="checkbox" id="cookieAnalytics">
+                            <label for="cookieAnalytics"></label>
+                        </div>
+                    </div>
+                    <p class="cookie-category-desc">Bu çerezler, ziyaretçilerin web sitesiyle nasıl etkileşime girdiğini anlamamıza yardımcı olur. Ziyaretçi sayısı, hemen çıkma oranı ve trafik kaynakları gibi bilgiler toplar.</p>
+                </div>
+
+                <!-- İşlevsellik Çerezleri -->
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <div class="cookie-category-info">
+                            <div class="cookie-category-icon functional">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="3"/>
+                                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>İşlevsellik Çerezleri</h4>
+                                <span class="cookie-category-badge optional">İzne Tabi</span>
+                            </div>
+                        </div>
+                        <div class="cookie-toggle">
+                            <input type="checkbox" id="cookieFunctional">
+                            <label for="cookieFunctional"></label>
+                        </div>
+                    </div>
+                    <p class="cookie-category-desc">Bu çerezler, dil tercihi veya tema seçimi gibi gelişmiş işlevsellik ve kişiselleştirme sağlar. Tercihlerinizi hatırlayarak daha iyi bir deneyim sunar.</p>
+                </div>
+
+                <!-- Pazarlama Çerezleri -->
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <div class="cookie-category-info">
+                            <div class="cookie-category-icon marketing">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>Pazarlama Çerezleri</h4>
+                                <span class="cookie-category-badge optional">İzne Tabi</span>
+                            </div>
+                        </div>
+                        <div class="cookie-toggle">
+                            <input type="checkbox" id="cookieMarketing">
+                            <label for="cookieMarketing"></label>
+                        </div>
+                    </div>
+                    <p class="cookie-category-desc">Bu çerezler, reklam ortaklarımız tarafından ilgi alanlarınıza uygun reklamlar göstermek için kullanılır. Ayrıca reklam kampanyalarının etkinliğini ölçmeye yardımcı olur.</p>
+                </div>
+            </div>
+
+            <div class="cookie-prefs-footer">
+                <div class="cookie-prefs-footer-links">
+                    <a href="{{BASE_PATH}}cerez-politikasi/">Çerez Politikası</a>
+                    <a href="{{BASE_PATH}}gizlilik-politikasi/">Gizlilik Politikası</a>
+                </div>
+                <div class="cookie-prefs-footer-buttons">
+                    <button class="btn btn-secondary" onclick="rejectAllCookies()">Tümünü Reddet</button>
+                    <button class="btn btn-primary" onclick="savePreferences()">Tercihleri Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- KVKK Modal -->
+    <div id="kvkkModal" class="modal-overlay">
+        <div class="kvkk-modal">
+            <div class="kvkk-header">
+                <div class="kvkk-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#334E68" stroke-width="1.5">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        <polyline points="9 12 11 14 15 10"/>
+                    </svg>
+                </div>
+                <h2>Kişisel Verilerin Korunması Hakkında Aydınlatma</h2>
+                <p>6698 Sayılı KVKK Kapsamında Bilgilendirme</p>
+                <button class="kvkk-close-btn" onclick="closeKVKKModal()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="kvkk-content">
+                <div class="kvkk-section">
+                    <h3>1. Veri Sorumlusu</h3>
+                    <p>CaretTask ("Uygulama") adına kişisel verileriniz, veri sorumlusu sıfatıyla CaretTask ekibi tarafından aşağıda açıklanan amaçlar ve hukuki sebeplerle işlenmektedir.</p>
+                </div>
+                <div class="kvkk-section">
+                    <h3>2. İşlenen Kişisel Veriler</h3>
+                    <p>Bu anket kapsamında aşağıdaki kişisel verileriniz işlenecektir:</p>
+                    <ul>
+                        <li><strong>Kimlik Bilgileri:</strong> Adınız (isteğe bağlı)</li>
+                        <li><strong>İletişim Bilgileri:</strong> E-posta adresiniz</li>
+                        <li><strong>Anket Yanıtları:</strong> Profil seçiminiz, görev yönetim alışkanlıklarınız, tercihleriniz ve geri bildirimleriniz</li>
+                    </ul>
+                </div>
+                <div class="kvkk-section">
+                    <h3>3. Kişisel Verilerin İşlenme Amaçları</h3>
+                    <p>Toplanan kişisel verileriniz aşağıdaki amaçlarla işlenecektir:</p>
+                    <ul>
+                        <li>Kullanıcı ihtiyaçlarını ve beklentilerini anlamak</li>
+                        <li>CaretTask uygulamasını geliştirmek ve iyileştirmek</li>
+                        <li>Hedef kitle analizi yapmak</li>
+                        <li>Uygulama yayına alındığında sizi bilgilendirmek</li>
+                        <li>Anonim istatistiksel analizler gerçekleştirmek</li>
+                    </ul>
+                </div>
+                <div class="kvkk-section">
+                    <h3>4. Kişisel Verilerin İşlenmesinin Hukuki Sebebi</h3>
+                    <p>Kişisel verileriniz, 6698 sayılı Kanun'un 5. maddesi 1. fıkrası kapsamında açık rızanıza dayanarak işlenecektir.</p>
+                </div>
+                <div class="kvkk-section">
+                    <h3>5. Kişisel Verilerin Aktarımı</h3>
+                    <p>Kişisel verileriniz; yasal zorunluluklar haricinde üçüncü taraflarla paylaşılmayacaktır. Anket yanıtları yalnızca CaretTask geliştirme ekibi tarafından anonim olarak analiz edilecektir.</p>
+                </div>
+                <div class="kvkk-section">
+                    <h3>6. Kişisel Verilerin Saklanma Süresi</h3>
+                    <p>Kişisel verileriniz, işleme amacının gerektirdiği süre boyunca saklanacak ve işleme amacı ortadan kalktığında silinecek veya anonim hale getirilecektir.</p>
+                </div>
+                <div class="kvkk-section">
+                    <h3>7. KVKK Kapsamındaki Haklarınız</h3>
+                    <p>6698 sayılı Kanun'un 11. maddesi uyarınca aşağıdaki haklara sahipsiniz:</p>
+                    <ul>
+                        <li>Kişisel verilerinizin işlenip işlenmediğini öğrenme</li>
+                        <li>İşlenmişse buna ilişkin bilgi talep etme</li>
+                        <li>İşleme amacını ve amacına uygun kullanılıp kullanılmadığını öğrenme</li>
+                        <li>Kişisel verilerin düzeltilmesini veya silinmesini isteme</li>
+                        <li>İşlemenin kısıtlanmasını isteme</li>
+                        <li>Verilerin üçüncü kişilere aktarılıp aktarılmadığını öğrenme</li>
+                    </ul>
+                </div>
+                <div class="kvkk-section">
+                    <h3>8. İletişim</h3>
+                    <p>KVKK kapsamındaki talepleriniz için: <a href="mailto:info@carettask.com">info@carettask.com</a></p>
+                </div>
+            </div>
+            <div class="kvkk-footer">
+                <div class="kvkk-checkbox-wrapper">
+                    <input type="checkbox" id="kvkkCheckbox" onchange="toggleKVKKAcceptBtn()">
+                    <label for="kvkkCheckbox">
+                        Yukarıdaki aydınlatma metnini okudum, anladım ve kişisel verilerimin belirtilen amaçlarla işlenmesine açık rıza veriyorum.
+                        <span class="required">*</span>
+                    </label>
+                </div>
+                <div id="kvkkError" class="kvkk-error">Devam etmek için aydınlatma metnini onaylamanız gerekmektedir.</div>
+                <div class="kvkk-buttons">
+                    <button class="btn btn-ghost" onclick="closeKVKKModal()">Vazgeç</button>
+                    <button class="btn btn-primary kvkk-accept-btn disabled" onclick="acceptKVKK()">Kabul Ediyorum ve Devam Et</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Survey Modal -->
+    <div id="surveyModal" class="modal-overlay">
+        <div class="survey-modal">
+            <div class="survey-modal-content">
+                <!-- Content will be rendered by JavaScript -->
+            </div>
+        </div>
+    </div>

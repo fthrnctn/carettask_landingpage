@@ -370,3 +370,86 @@ const heroSection = document.querySelector('.hero');
 if (heroSection) {
     heroObserver.observe(heroSection);
 }
+
+// Auth Modal Functions
+function openAuthModal(type) {
+    const modal = document.getElementById('authModal');
+    const title = document.getElementById('authModalTitle');
+    const emailInput = document.getElementById('authEmailInput');
+    const errorDiv = document.getElementById('authEmailError');
+
+    // Set title based on type
+    if (type === 'login') {
+        title.textContent = 'Giriş Yapın';
+    } else {
+        title.textContent = 'Ücretsiz Başlayın';
+    }
+
+    // Reset form
+    emailInput.value = '';
+    errorDiv.textContent = '';
+
+    // Show modal
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+
+    // Focus email input
+    setTimeout(() => emailInput.focus(), 300);
+
+    // Close on overlay click
+    modal.onclick = function(e) {
+        if (e.target === modal) {
+            closeAuthModal();
+        }
+    };
+
+    // Close on Escape key
+    document.addEventListener('keydown', handleAuthModalEscape);
+}
+
+function handleAuthModalEscape(e) {
+    if (e.key === 'Escape') {
+        closeAuthModal();
+    }
+}
+
+function closeAuthModal() {
+    const modal = document.getElementById('authModal');
+    modal.classList.remove('show');
+    document.body.style.overflow = '';
+    document.removeEventListener('keydown', handleAuthModalEscape);
+}
+
+function submitAuthEmail() {
+    const emailInput = document.getElementById('authEmailInput');
+    const errorDiv = document.getElementById('authEmailError');
+    const email = emailInput.value.trim();
+
+    // Validate email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email) {
+        errorDiv.textContent = 'Lütfen e-posta adresinizi girin.';
+        emailInput.focus();
+        return;
+    }
+    if (!emailRegex.test(email)) {
+        errorDiv.textContent = 'Lütfen geçerli bir e-posta adresi girin.';
+        emailInput.focus();
+        return;
+    }
+
+    // Clear error
+    errorDiv.textContent = '';
+
+    // Here you would typically send the email to your backend
+    console.log('Email submitted:', email);
+
+    // Show success state (you can customize this)
+    const content = document.querySelector('.auth-modal-content');
+    content.innerHTML = `
+        <div class="auth-icon">✅</div>
+        <h4>Teşekkürler!</h4>
+        <p>E-posta adresiniz kaydedildi. CaretTask yayına girdiğinde sizi haberdar edeceğiz.</p>
+        <button class="auth-submit-btn" onclick="closeAuthModal()" style="margin-top: 24px;">Tamam</button>
+    `;
+}

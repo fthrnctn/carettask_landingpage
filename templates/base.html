@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VTW1Y8KVXV"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-VTW1Y8KVXV');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {{HEAD_CONTENT}}
+
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!-- Stylesheets -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{CSS_PATH}}styles.css">
+</head>
+<body>
+    {{HEADER}}
+
+    {{PAGE_CONTENT}}
+
+    {{FOOTER}}
+
+    {{MODALS}}
+
+    <script src="{{JS_PATH}}analytics.js"></script>
+    <script src="{{JS_PATH}}script.js"></script>
+    {{EXTRA_SCRIPTS}}
+</body>
+</html>

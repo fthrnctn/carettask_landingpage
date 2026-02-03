@@ -1,0 +1,12 @@
+{
+  "name": "carettask-landing-page",
+  "version": "1.0.0",
+  "description": "CaretTask Landing Page with shared components",
+  "scripts": {
+    "build": "node build.js",
+    "dev": "node build.js --watch"
+  },
+  "keywords": ["landing-page", "static-site"],
+  "author": "CaretTask",
+  "license": "MIT"
+}
