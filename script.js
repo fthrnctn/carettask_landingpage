@@ -447,7 +447,11 @@ function submitAuthEmail() {
     // Show success state (you can customize this)
     const content = document.querySelector('.auth-modal-content');
     content.innerHTML = `
-        <div class="auth-icon">✅</div>
+        <div class="auth-icon" style="background: none; width: auto; height: auto;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#334E68" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+        </div>
         <h4>Teşekkürler!</h4>
         <p>E-posta adresiniz kaydedildi. CaretTask yayına girdiğinde sizi haberdar edeceğiz.</p>
         <button class="auth-submit-btn" onclick="closeAuthModal()" style="margin-top: 24px;">Tamam</button>
