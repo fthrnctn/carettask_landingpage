@@ -444,16 +444,17 @@ function submitAuthEmail() {
     // Here you would typically send the email to your backend
     console.log('Email submitted:', email);
 
-    // Show success state (you can customize this)
+    // Show success state
     const content = document.querySelector('.auth-modal-content');
+    content.className = 'auth-success-content';
     content.innerHTML = `
-        <div class="auth-icon" style="background: none; width: auto; height: auto;">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#334E68" stroke-width="2.5">
+        <div class="auth-success-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#334E68" stroke-width="2.5">
                 <polyline points="20 6 9 17 4 12"></polyline>
             </svg>
         </div>
-        <h4>Teşekkürler!</h4>
+        <h2>Teşekkürler!</h2>
         <p>E-posta adresiniz kaydedildi. CaretTask yayına girdiğinde sizi haberdar edeceğiz.</p>
-        <button class="auth-submit-btn" onclick="closeAuthModal()" style="margin-top: 24px;">Tamam</button>
+        <button class="auth-success-btn" onclick="closeAuthModal()">Tamam, Kapat</button>
     `;
 }

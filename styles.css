@@ -1281,6 +1281,60 @@ img {
     margin-top: 16px;
 }
 
+/* Auth Modal Success State */
+.auth-success-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+    text-align: center;
+}
+
+.auth-success-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--color-bg-secondary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    animation: successPop 0.4s ease;
+}
+
+.auth-success-content h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 12px;
+}
+
+.auth-success-content p {
+    font-size: 15px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 32px;
+    max-width: 320px;
+}
+
+.auth-success-btn {
+    padding: 14px 32px;
+    background: var(--color-bg-secondary);
+    color: var(--color-primary);
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.auth-success-btn:hover {
+    background: var(--color-border);
+    color: var(--color-primary-dark);
+}
+
 /* Survey Modal */
 .survey-modal {
     width: 100%;
