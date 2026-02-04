@@ -1086,7 +1086,6 @@ function openKVKKModal() {
 function closeKVKKModal() {
     document.getElementById('kvkkModal').classList.remove('show');
     document.getElementById('kvkkCheckbox').checked = false;
-    document.getElementById('kvkkError').style.display = 'none';
     document.querySelector('.kvkk-accept-btn').classList.add('disabled');
     document.body.style.overflow = '';
 }
@@ -1094,11 +1093,9 @@ function closeKVKKModal() {
 function toggleKVKKAcceptBtn() {
     const checkbox = document.getElementById('kvkkCheckbox');
     const acceptBtn = document.querySelector('.kvkk-accept-btn');
-    const errorDiv = document.getElementById('kvkkError');
 
     if (checkbox.checked) {
         acceptBtn.classList.remove('disabled');
-        errorDiv.style.display = 'none';
     } else {
         acceptBtn.classList.add('disabled');
     }
@@ -1107,10 +1104,8 @@ function toggleKVKKAcceptBtn() {
 function acceptKVKK() {
     const checkbox = document.getElementById('kvkkCheckbox');
     const acceptBtn = document.querySelector('.kvkk-accept-btn');
-    const errorDiv = document.getElementById('kvkkError');
 
     if (!checkbox.checked || acceptBtn.classList.contains('disabled')) {
-        errorDiv.style.display = 'block';
         checkbox.classList.add('shake');
         setTimeout(() => {
             checkbox.classList.remove('shake');

@@ -510,7 +510,7 @@ function submitAuthEmail() {
     console.log('Email submitted:', email);
 
     // Show success state
-    const content = document.querySelector('.auth-modal-content');
+    const content = document.querySelector('.auth-modal-content, .auth-success-content');
     content.className = 'auth-success-content';
     content.innerHTML = `
         <div class="auth-success-icon">
