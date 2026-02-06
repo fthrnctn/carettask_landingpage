@@ -108,7 +108,7 @@ const surveyConfig = {
             id: 'liked-features',
             type: 'multi-select',
             maxSelect: 3,
-            question: 'Şu anda kullandığınız araçta en çok kullandığınız ve sizi tutan şey ne?',
+            question: 'Şu anda kullandığınız araçta en çok kullandığınız şey ne?',
             subtext: '(En fazla 3 seçim yapabilirsiniz)',
             options: [
                 { id: 'quick-add', title: 'Hızlı görev ekleme', description: 'Saniyeler içinde yeni görev girebiliyorum' },
@@ -123,8 +123,7 @@ const surveyConfig = {
                 { id: 'attachments', title: 'Dosya ekleme', description: 'Görevlere dosya/link ekleyebiliyorum' },
                 { id: 'search', title: 'Arama/Filtreleme', description: 'İstediğimi hızlıca bulabiliyorum' },
                 { id: 'offline', title: 'Offline çalışma', description: 'İnternet olmadan da kullanabiliyorum' },
-                { id: 'nice-ui', title: 'Güzel/Modern arayüz', description: 'Kullanması keyifli, estetik' },
-                { id: 'free', title: 'Ücretsiz olması', description: 'Para ödemeden kullanabiliyorum' }
+                { id: 'nice-ui', title: 'Güzel/Modern arayüz', description: 'Kullanması keyifli, estetik' }
             ]
         },
         {
@@ -269,7 +268,7 @@ const surveyConfig = {
                 { id: 'file-sharing', title: 'Dosya paylaşımı', description: 'Dokümanları göreve ekleme' },
                 { id: 'notification-mgmt', title: 'Bildirim yönetimi', description: 'Hangi uyarıları alacağımı seçme' },
                 { id: 'recurring-tasks', title: 'Tekrarlayan görev otomasyonu', description: 'Rutin işlerin otomatik oluşması' },
-                { id: 'integrations', title: 'Diğer araçlarla entegrasyon', description: 'Slack, Jira vb. ile bağlantı' }
+                { id: 'integrations', title: 'Diğer araçlarla entegrasyon', description: 'Slack, Github vb. ile bağlantı' }
             ]
         },
         {
@@ -574,7 +573,6 @@ function renderSingleSelect(step) {
 
     return `
         <div class="survey-screen question-screen">
-            <div class="survey-emoji">💭</div>
             <h2>${step.question}</h2>
             ${step.subtext ? `<p class="survey-subtext">${step.subtext}</p>` : ''}
             <div class="survey-options">
@@ -605,7 +603,6 @@ function renderMultiSelect(step) {
 
     return `
         <div class="survey-screen question-screen">
-            <div class="survey-emoji">✨</div>
             <h2>${step.question}</h2>
             <p class="survey-subtext">${step.subtext || '(Birden fazla seçebilirsin)'}</p>
             <div class="survey-options">
