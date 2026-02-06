@@ -125,7 +125,7 @@ function buildPage(pageConfig) {
         HEAD_CONTENT: headContent,
         HEADER: replaceVariables(header, { BASE_PATH: pageConfig.basePath }),
         FOOTER: replaceVariables(footer, { BASE_PATH: pageConfig.basePath }),
-        PAGE_CONTENT: pageContent,
+        PAGE_CONTENT: replaceVariables(pageContent, { BASE_PATH: pageConfig.basePath }),
         MODALS: replaceVariables(modals, { BASE_PATH: pageConfig.basePath }),
         EXTRA_SCRIPTS: pageConfig.extraScripts
     };
