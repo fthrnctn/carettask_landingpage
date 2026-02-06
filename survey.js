@@ -108,7 +108,7 @@ const surveyConfig = {
             id: 'liked-features',
             type: 'multi-select',
             maxSelect: 3,
-            question: 'Şu anda kullandığınız araçta en çok kullandığınız şey ne?',
+            question: 'Şu anda kullandığınız araçta en çok kullandığınız ve sizi tutan şey ne?',
             subtext: '(En fazla 3 seçim yapabilirsiniz)',
             options: [
                 { id: 'quick-add', title: 'Hızlı görev ekleme', description: 'Saniyeler içinde yeni görev girebiliyorum' },
@@ -151,7 +151,7 @@ const surveyConfig = {
             options: [
                 { id: 'current-method-ok', title: 'Mevcut yöntemim yeterli', description: 'Kağıt, not defteri veya zihnimle idare ediyorum' },
                 { id: 'too-complex', title: 'Denediklerim çok karmaşıktı', description: 'Öğrenmesi ve kullanması zor geldi' },
-                { id: 'expensive', title: 'Fiyatlar çok yüksek', description: 'İstediğim özellikleri ücretsiz bulamadım' },
+                { id: 'expensive', title: 'Ücretli olması', description: 'İstediğim özellikleri ücretsiz bulamadım' },
                 { id: 'team-uses-other', title: 'Ekibim/şirketim farklı araç kullanıyor', description: 'Şirket başka bir şey dayatıyor' },
                 { id: 'cant-decide', title: 'Hangi aracı seçeceğimi bilmiyorum', description: 'Çok fazla seçenek var, karar veremedim' },
                 { id: 'security-concern', title: 'Veri güvenliği endişelerim var', description: 'Bilgilerimi buluta koymak istemiyorum' },
@@ -240,7 +240,7 @@ const surveyConfig = {
                 { id: 'company-decides', title: 'Şirket/yönetici karar veriyor', description: 'Ben seçmiyorum' },
                 { id: 'choice-fatigue', title: 'Doğru aracı bulmak yorucu', description: 'Çok fazla seçenek var' },
                 { id: 'good-enough', title: 'Mevcut aracım "yeterince iyi"', description: 'Mükemmel değil ama idare ediyor' },
-                { id: 'cost', title: 'Ücretli planlar pahalı', description: 'Bütçem kısıtlı' },
+                { id: 'cost', title: 'Ücretli olması', description: 'Bütçem kısıtlı' },
                 { id: 'integration-break', title: 'Entegrasyonlarım bozulur', description: 'Diğer araçlarla bağlantı kopar' },
                 { id: 'trial-short', title: 'Deneme süresi yetmiyor', description: 'Karar vermeden süre doluyor' },
                 { id: 'no-barrier', title: 'Bu konuda engel hissetmiyorum', description: 'İstesem kolayca değiştirebilirim' }
@@ -323,6 +323,7 @@ function normalizeAnswers(answers, otherTexts) {
         feature_priorities: answers['feature-priorities'] || [],
         usp_motivation: answers['usp-motivation'] || '',
         email: answers['email'] || 'skipped',
+        feedback: answers['feedback'] || '',
         other_texts: otherTexts || {}
     };
 }
@@ -434,8 +435,9 @@ function buildSteps() {
         steps.push(...surveyConfig.featurePreferences);
     }
 
-    // Email and Success
+    // Email, Feedback and Success
     steps.push({ id: 'email', type: 'email' });
+    steps.push({ id: 'feedback', type: 'feedback' });
     steps.push({ id: 'success', type: 'success' });
 
     return steps;
@@ -456,7 +458,7 @@ function getTotalSteps() {
 function canProceed() {
     const currentStep = getCurrentStep();
 
-    if (currentStep.id === 'intro' || currentStep.id === 'email' || currentStep.id === 'success') {
+    if (currentStep.id === 'intro' || currentStep.id === 'email' || currentStep.id === 'feedback' || currentStep.id === 'success') {
         return true;
     }
 
@@ -516,6 +518,9 @@ function renderSurveyModal() {
         case 'email':
             contentHTML += renderEmailScreen();
             break;
+        case 'feedback':
+            contentHTML += renderFeedbackScreen();
+            break;
         case 'success':
             contentHTML += renderSuccessScreen();
             break;
@@ -524,7 +529,7 @@ function renderSurveyModal() {
     contentHTML += '</div>';
 
     // Navigation (not for intro and success)
-    if (currentStep.id !== 'intro' && currentStep.id !== 'success') {
+    if (currentStep.id !== 'intro' && currentStep.id !== 'success' && currentStep.id !== 'feedback') {
         contentHTML += `
             <div class="survey-nav">
                 <button class="survey-nav-btn survey-nav-back ${surveyState.currentStepIndex === 0 ? 'disabled' : ''}"
@@ -657,6 +662,24 @@ function renderEmailScreen() {
                 Hayır, teşekkürler
             </button>
             <p class="survey-email-note">E-postanı yalnızca CaretTask ile ilgili güncellemeler için kullanacağız.</p>
+        </div>
+    `;
+}
+
+function renderFeedbackScreen() {
+    const existingFeedback = surveyState.answers['feedback'] || '';
+    return `
+        <div class="survey-screen feedback-screen">
+            <div class="survey-emoji">💬</div>
+            <h2>Son bir şey!</h2>
+            <p>Hayalinizdeki görev yönetimi uygulamasını tarif edebilir misiniz? Öneriniz varsa dinlemeyi çok isteriz!</p>
+            <textarea id="surveyFeedback" class="survey-textarea" placeholder="Fikirlerinizi buraya yazabilirsiniz..." rows="4">${existingFeedback}</textarea>
+            <button class="survey-email-submit" onclick="submitFeedback()">
+                Gönder ve Bitir
+            </button>
+            <button class="survey-email-skip" onclick="skipFeedback()">
+                Atla
+            </button>
         </div>
     `;
 }
@@ -862,21 +885,27 @@ function submitEmail() {
     }
 
     surveyState.answers['email'] = email;
-    surveyState.isComplete = true;
-
-    // Submit to webhook (async, don't block UI)
-    submitSurveyToWebhook();
-
     surveyNext();
 }
 
 function skipEmail() {
     surveyState.answers['email'] = 'skipped';
+    surveyNext();
+}
+
+function submitFeedback() {
+    const textarea = document.getElementById('surveyFeedback');
+    if (textarea && textarea.value.trim()) {
+        surveyState.answers['feedback'] = textarea.value.trim();
+    }
     surveyState.isComplete = true;
-
-    // Submit to webhook (async, don't block UI)
     submitSurveyToWebhook();
+    surveyNext();
+}
 
+function skipFeedback() {
+    surveyState.isComplete = true;
+    submitSurveyToWebhook();
     surveyNext();
 }
 
