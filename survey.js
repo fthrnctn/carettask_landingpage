@@ -2,395 +2,297 @@
 
 // Survey Flow Configuration
 const surveyConfig = {
-    profiles: {
-        'tech-lead': {
-            title: 'Teknik Lider / Geliştirici',
-            description: 'Kodlar, Sprint\'ler ve teknik süreçler.',
-            emoji: '💻'
-        },
-        'entrepreneur': {
-            title: 'Girişimci / Ürün Yöneticisi',
-            description: 'Strateji, Roadmap ve operasyon.',
-            emoji: '🚀'
-        },
-        'academic': {
-            title: 'Akademisyen / Araştırmacı',
-            description: 'Tez, literatür ve derin okumalar.',
-            emoji: '📚'
-        },
-        'corporate': {
-            title: 'Kurumsal Profesyonel',
-            description: 'Toplantı trafiği, raporlar ve ekip yönetimi.',
-            emoji: '💼'
-        },
-        'student': {
-            title: 'Öğrenci',
-            description: 'Sınav takvimi ve sosyal hayat dengesi.',
-            emoji: '🎓'
-        },
-        'creative': {
-            title: 'Yaratıcı / Freelancer',
-            description: 'Proje teslimleri ve müşteri revizeleri.',
-            emoji: '🎨'
-        }
-    },
-
-    behaviors: [
-        { id: 'always-write', title: 'Mutlaka yazarım/kaydederim', description: 'Yazmazsam yok olur, rahat edemem.' },
-        { id: 'flow', title: 'Akışına bırakırım, aklımda tutarım', description: 'Ya da sonra yaparım derim.' },
-        { id: 'sometimes-write', title: 'Bazen yazıyorum', description: 'Ama düzenli bir sistemim yok.' }
-    ],
-
-    profileQuestions: {
-        'tech-lead': [
-            {
-                id: 'content-tech',
-                type: 'multi-select',
-                question: 'Kod dünyasında işler karışık. Senin "Yapılacaklar Listeni" en çok hangileri şişiriyor?',
-                subtext: '(Birden fazla seçebilirsin)',
-                options: [
-                    { id: 'bug-tracking', title: 'Bug Tracking', description: 'Anlık çıkan hataları ve düzeltmeleri takip etmek.' },
-                    { id: 'feature-dev', title: 'Feature Development', description: 'Yeni özelliklerin geliştirme süreçlerini planlamak.' },
-                    { id: 'roadmap', title: 'Roadmap & Milestones', description: 'Projenin 3-6 aylık teknik yol haritasını çizmek.' },
-                    { id: 'tech-debt', title: 'Tech Debt & Refactoring', description: 'Teknik borçları ve iyileştirmeleri not almak.' },
-                    { id: 'code-review', title: 'Code Review', description: 'Ekip arkadaşlarının kodlarını inceleme hatırlatmaları.' },
-                    { id: 'daily-standup', title: 'Daily Standups', description: 'Günlük sync notları ve blocker\'lar.' }
-                ]
-            },
-            {
-                id: 'view-tech',
-                type: 'multi-select',
-                question: 'Peki bu teknik karmaşayı yönetirken beynin hangi görünümde daha rahat ediyor?',
-                options: [
-                    { id: 'kanban', title: 'Kanban Board', description: 'Sütunlar olsun. İşleri sürükleyip bırakmak beni rahatlatıyor.' },
-                    { id: 'sprint', title: 'Sprint List', description: 'Scrum mantığı. 2 haftalık periyotlara bölünmüş listeler.' },
-                    { id: 'backlog', title: 'Backlog (Düz Liste)', description: 'Sadece alt alta sıralanmış, önceliklendirilmiş liste.' },
-                    { id: 'timeline', title: 'Timeline / Gantt', description: 'Zaman çizelgesi üzerinde görmek.' },
-                    { id: 'dependency', title: 'Dependency Graph', description: 'Bağımlılıkları görselleştirmek.' }
-                ]
-            },
-            {
-                id: 'tools-tech',
-                type: 'multi-select',
-                question: 'Dijital şantiyen neresi? Hangi araçları kullanıyorsun?',
-                options: [
-                    { id: 'jira', title: 'Jira / Linear / Azure DevOps' },
-                    { id: 'github', title: 'GitHub Projects / GitLab' },
-                    { id: 'trello', title: 'Trello / Kanban Board' },
-                    { id: 'notion', title: 'Notion / Obsidian / Logseq' },
-                    { id: 'todoist', title: 'Todoist / TickTick' },
-                    { id: 'paper', title: 'Kağıt / Defter / Post-it' }
-                ]
-            }
-        ],
-        'entrepreneur': [
-            {
-                id: 'content-entrepreneur',
-                type: 'multi-select',
-                question: 'Bir kurucu olarak şapkan çok. Listende en çok yer kaplayan başlıklar neler?',
-                subtext: '(Birden fazla seçebilirsin)',
-                options: [
-                    { id: 'roadmap', title: 'Ürün Yol Haritası (Roadmap)', description: 'Ürünü nereye götüreceğimizin planı.' },
-                    { id: 'backlog', title: 'Feature Backlog', description: 'Parlak özellik fikirlerini kaybetmemek.' },
-                    { id: 'bugs', title: 'Bug & Issue Tracking', description: 'Kullanıcılardan gelen hataları takip etmek.' },
-                    { id: 'finance', title: 'Yatırım & Finans', description: 'Nakit akışı ve yatırımcı sunumları.' },
-                    { id: 'marketing', title: 'Pazarlama & Büyüme', description: 'Kampanyalar ve içerik planları.' },
-                    { id: 'operations', title: 'Operasyon', description: 'Günlük yangın söndürme işleri.' },
-                    { id: 'team', title: 'Ekip Yönetimi', description: 'Kimin ne yaptığını takip etmek.' }
-                ]
-            },
-            {
-                id: 'view-entrepreneur',
-                type: 'multi-select',
-                question: 'Büyük resmi en iyi nasıl görüyorsun?',
-                options: [
-                    { id: 'gantt', title: 'Gantt / Timeline', description: 'Hangi iş ne zaman bitecek?' },
-                    { id: 'okr', title: 'OKR / Hedef Kartları', description: 'Büyük hedefler ve ilerleme çubukları.' },
-                    { id: 'board', title: 'Board (Pano)', description: 'Departmanlara ayrılmış panolar.' },
-                    { id: 'minimal', title: 'Minimal Liste', description: 'Sadece bugün ne yapacağımı göreyim.' },
-                    { id: 'dashboard', title: 'Dashboard', description: 'Metrikler ve grafikler.' }
-                ]
-            },
-            {
-                id: 'tools-entrepreneur',
-                type: 'multi-select',
-                question: 'Bu operasyonu yönettiğin ana karargah neresi?',
-                options: [
-                    { id: 'pm-tools', title: 'Jira / Asana / Monday / ClickUp' },
-                    { id: 'all-in-one', title: 'Notion / Coda' },
-                    { id: 'trello', title: 'Trello' },
-                    { id: 'chat', title: 'Slack / Discord / WhatsApp' },
-                    { id: 'sheets', title: 'Google Sheets / Excel' },
-                    { id: 'whiteboard', title: 'Whiteboard / Post-it' }
-                ]
-            }
-        ],
-        'academic': [
-            {
-                id: 'content-academic',
-                type: 'multi-select',
-                question: 'Akademik süreç uzun bir maraton. Senin notlarını neler oluşturuyor?',
-                options: [
-                    { id: 'literature', title: 'Literatür Taraması', description: 'Okunacak makaleler ve alınacak notlar.' },
-                    { id: 'publishing', title: 'Yayın Süreci', description: 'Makale yazımı ve dergi başvuruları.' },
-                    { id: 'admin', title: 'İdari İşler', description: 'Ders programı ve fakülte işleri.' },
-                    { id: 'data', title: 'Veri Analizi', description: 'Araştırma verilerinin toplanması.' },
-                    { id: 'thesis', title: 'Tez / Proje Yönetimi', description: 'Büyük araştırma projesinin aşamaları.' },
-                    { id: 'teaching', title: 'Ders Hazırlığı', description: 'Slaytlar, ödevler ve sınav hazırlığı.' }
-                ]
-            },
-            {
-                id: 'view-academic',
-                type: 'multi-select',
-                question: 'Bilgi yığınları arasında nasıl bir yapı tercih edersin?',
-                options: [
-                    { id: 'graph', title: 'Network / Graph View', description: 'Notlarımın bağlantısını göreyim.' },
-                    { id: 'hierarchy', title: 'Klasör / Hiyerarşi', description: 'İç içe geçmiş klasörler.' },
-                    { id: 'calendar', title: 'Takvim', description: 'Teslim tarihlerini takvimde göreyim.' },
-                    { id: 'chronological', title: 'Kronolojik Liste', description: 'En son eklediğim en üstte.' },
-                    { id: 'tags', title: 'Tag Sistemi', description: 'Etiketlerle her şeyi bulabileyim.' }
-                ]
-            },
-            {
-                id: 'tools-academic',
-                type: 'multi-select',
-                question: 'Kütüphanerin neresi? Hangi araçları kullanıyorsun?',
-                options: [
-                    { id: 'zettelkasten', title: 'Obsidian / Roam Research / Logseq' },
-                    { id: 'reference', title: 'Zotero / Mendeley' },
-                    { id: 'notion', title: 'Notion' },
-                    { id: 'notebook', title: 'Fiziksel Ajanda / Defter' },
-                    { id: 'calendar', title: 'Google Calendar / Outlook' },
-                    { id: 'notes', title: 'Apple Notes / Google Keep' }
-                ]
-            }
-        ],
-        'corporate': [
-            {
-                id: 'content-corporate',
-                type: 'multi-select',
-                question: 'Kurumsal hayatın koşturmacasında listende neler var?',
-                options: [
-                    { id: 'meetings', title: 'Toplantı Action Item\'ları', description: 'Toplantılarda konuşulan görevler.' },
-                    { id: 'email', title: 'E-posta Takibi', description: 'Mail kutusundaki işleri ayıklamak.' },
-                    { id: 'reporting', title: 'Raporlama', description: 'Yöneticiye rapor verme görevleri.' },
-                    { id: 'coordination', title: 'Ekip Koordinasyonu', description: 'Kimin ne yaptığını takip etmek.' },
-                    { id: 'deadlines', title: 'Deadline Yönetimi', description: 'Proje teslim tarihlerini kaçırmamak.' },
-                    { id: 'personal-dev', title: 'Kişisel Gelişim', description: 'Eğitim, sertifikasyon, kariyer.' }
-                ]
-            },
-            {
-                id: 'view-corporate',
-                type: 'multi-select',
-                question: 'Toplantı trafiği arasında işlerini nasıl organize etmek istersin?',
-                options: [
-                    { id: 'checklist', title: 'Checklist (Basit Liste)', description: 'Sadece tik atıp geçeceğim liste.' },
-                    { id: 'agenda', title: 'Günlük Ajanda', description: 'Saat saat günümü planlama.' },
-                    { id: 'matrix', title: 'Eisenhower Matrisi', description: 'Acil/Önemli ayrımı.' },
-                    { id: 'kanban', title: 'Kanban', description: 'To Do, In Progress, Done sütunları.' },
-                    { id: 'dashboard', title: 'Dashboard', description: 'Haftalık/aylık özet görünümü.' }
-                ]
-            },
-            {
-                id: 'tools-corporate',
-                type: 'multi-select',
-                question: 'Şirketin izin verdiği araç hangisi?',
-                options: [
-                    { id: 'microsoft', title: 'Microsoft To Do / Outlook Tasks / Planner' },
-                    { id: 'trello', title: 'Trello / Planner' },
-                    { id: 'sheets', title: 'Excel / Google Sheets' },
-                    { id: 'notebook', title: 'Ajanda / Defter' },
-                    { id: 'onenote', title: 'OneNote / Notion' },
-                    { id: 'reminders', title: 'Apple Reminders / Google Tasks' }
-                ]
-            }
-        ],
-        'student': [
-            {
-                id: 'content-student',
-                type: 'multi-select',
-                question: 'Dersler, ödevler, sosyal hayat... Listende neler birikiyor?',
-                options: [
-                    { id: 'homework', title: 'Ödev Teslimleri', description: 'Hangi ödev ne zaman teslim?' },
-                    { id: 'exams', title: 'Sınav Takvimi', description: 'Vizeler, finaller ve quiz\'ler.' },
-                    { id: 'notes', title: 'Ders Notları & Okumalar', description: 'Okunacak kitaplar ve kaynaklar.' },
-                    { id: 'personal', title: 'Kişisel Hedefler', description: 'Spor, hobi, kişisel gelişim.' },
-                    { id: 'social', title: 'Sosyal Etkinlikler', description: 'Buluşmalar, kulüp aktiviteleri.' },
-                    { id: 'career', title: 'Staj / İş Başvuruları', description: 'Kariyer hazırlığı.' }
-                ]
-            },
-            {
-                id: 'view-student',
-                type: 'multi-select',
-                question: 'Dersler ve sosyal hayat... Telefonunda ne görmek istersin?',
-                options: [
-                    { id: 'schedule', title: 'Haftalık Ders Programı', description: 'Boş saatlerimin içine görevler.' },
-                    { id: 'countdown', title: 'Geri Sayım (Countdown)', description: 'Sınava kaç gün kaldı?' },
-                    { id: 'gamification', title: 'Gamification', description: 'Görev yaptıkça seviye atlama.' },
-                    { id: 'simple', title: 'Basit Checklist', description: 'Sadece tik atıp geçeyim.' },
-                    { id: 'calendar', title: 'Takvim Görünümü', description: 'Her şeyi takvimde göreyim.' }
-                ]
-            },
-            {
-                id: 'tools-student',
-                type: 'multi-select',
-                question: 'Çantanda veya telefonunda bu iş için ne var?',
-                options: [
-                    { id: 'notion', title: 'Notion', description: 'Estetik notlar ve planlar.' },
-                    { id: 'calendar', title: 'Google Takvim / Apple Calendar' },
-                    { id: 'pomodoro', title: 'Forest / Pomodoro uygulamaları' },
-                    { id: 'reminders', title: 'Telefonun Hatırlatıcıları' },
-                    { id: 'notebook', title: 'Renkli kalemler ve fiziksel planlayıcılar' },
-                    { id: 'todoist', title: 'Todoist / TickTick' }
-                ]
-            }
-        ],
-        'creative': [
-            {
-                id: 'content-creative',
-                type: 'multi-select',
-                question: 'Freelance hayatın karmaşasında listende neler var?',
-                options: [
-                    { id: 'deliverables', title: 'Proje Teslimleri', description: 'Müşteriye söz verilen tarihler.' },
-                    { id: 'invoicing', title: 'Faturalama & Saat Takibi', description: 'Çalışma saatleri ve ödemeler.' },
-                    { id: 'clients', title: 'Müşteri Yönetimi', description: 'Birden fazla müşterinin işleri.' },
-                    { id: 'revisions', title: 'Revize İstekleri', description: 'Müşteri geri bildirimleri.' },
-                    { id: 'ideas', title: 'Fikir & İlham', description: 'Yaratıcı fikirleri kaydetmek.' },
-                    { id: 'personal', title: 'Kişisel İşler', description: 'Ev işleri ve kişisel görevler.' }
-                ]
-            },
-            {
-                id: 'view-creative',
-                type: 'multi-select',
-                question: 'İşlerini nasıl organize etmek istersin?',
-                options: [
-                    { id: 'client-boards', title: 'Müşteri Bazlı Panolar', description: 'Her müşteri için ayrı pano.' },
-                    { id: 'calendar', title: 'Takvim / Deadline View', description: 'Her şeyi tarih bazlı görmek.' },
-                    { id: 'simple-list', title: 'Basit Liste', description: 'Sadece günlük yapılacaklar.' },
-                    { id: 'project-tracking', title: 'Proje Bazlı Tracking', description: 'Bütçe ve saat takibi.' },
-                    { id: 'weekly', title: 'Haftalık Özet', description: 'Bu hafta ne yaptım, ne kazandım?' }
-                ]
-            },
-            {
-                id: 'tools-creative',
-                type: 'multi-select',
-                question: 'İş akışını nerede tutuyorsun?',
-                options: [
-                    { id: 'task-apps', title: 'Todoist / TickTick' },
-                    { id: 'boards', title: 'Trello / Notion' },
-                    { id: 'notes', title: 'Basit Not Defteri / Apple Notes' },
-                    { id: 'email', title: 'E-posta / Kendime hatırlatma' },
-                    { id: 'time-tracking', title: 'Toggl / Clockify' },
-                    { id: 'paper', title: 'Kağıt / Defter' }
-                ]
-            }
-        ]
-    },
-
-    nonNoteTakerQuestions: [
+    demographics: [
         {
-            id: 'barrier',
+            id: 'work-status',
             type: 'multi-select',
-            question: 'Zihnine güvenmen etkileyici! Peki, seni bir liste tutmaktan alıkoyan sebepler neler?',
+            maxSelect: 2,
+            question: 'Şu anda hangi çalışma düzenine sahipsiniz?',
+            subtext: '(En fazla 2 seçim yapabilirsiniz)',
             options: [
-                { id: 'friction', title: 'Üşengeçlik / Sürtünme', description: 'Uygulamayı aç, yeni görev ekle... Çok uzun iş.' },
-                { id: 'complexity', title: 'Karmaşa', description: 'Mevcut uygulamalar çok karışık geliyor.' },
-                { id: 'not-needed', title: 'Gerek Yok', description: 'İşlerim o kadar karışık değil.' },
-                { id: 'sustainability', title: 'Sürdürülebilirlik', description: 'Başlıyorum ama 3 gün sonra bırakıyorum.' },
-                { id: 'fast-change', title: 'Süreçler Hızlı Değişiyor', description: 'Plan yapmaya vakit yok.' }
+                { id: 'fulltime-office', title: 'Tam zamanlı çalışan (şirkette)', description: 'Ofise giderek çalışıyorum' },
+                { id: 'fulltime-remote', title: 'Tam zamanlı çalışan (uzaktan)', description: 'Evden veya uzaktan çalışıyorum' },
+                { id: 'parttime', title: 'Yarı zamanlı çalışan', description: 'Haftada belirli günler çalışıyorum' },
+                { id: 'freelancer', title: 'Freelancer/Serbest çalışan', description: 'Bağımsız olarak projeler alıyorum' },
+                { id: 'entrepreneur', title: 'Girişimci/İş sahibi', description: 'Kendi işimi kurdum veya yönetiyorum' },
+                { id: 'student', title: 'Öğrenci', description: 'Üniversite veya lisansüstü öğrencisiyim' },
+                { id: 'job-seeking', title: 'İş arıyor', description: 'Şu anda aktif iş arıyorum' },
+                { id: 'other-work', title: 'Diğer', description: '', isOther: true }
             ]
         },
         {
-            id: 'pain-recognition',
+            id: 'sector',
+            type: 'multi-select',
+            maxSelect: 2,
+            question: 'Hangi sektörde çalışıyorsunuz/faaliyet gösteriyorsunuz?',
+            subtext: '(En fazla 2 seçim yapabilirsiniz)',
+            options: [
+                { id: 'tech', title: 'Teknoloji/Yazılım', description: 'Yazılım, IT, SaaS şirketleri' },
+                { id: 'finance', title: 'Finans/Bankacılık', description: 'Banka, sigorta, yatırım kuruluşları' },
+                { id: 'health', title: 'Sağlık', description: 'Hastane, klinik, ilaç sektörü' },
+                { id: 'education', title: 'Eğitim', description: 'Okul, üniversite, eğitim kurumları' },
+                { id: 'retail', title: 'Perakende/E-ticaret', description: 'Mağaza, online satış' },
+                { id: 'manufacturing', title: 'Üretim/Sanayi', description: 'Fabrika, imalat tesisleri' },
+                { id: 'media', title: 'Medya/Reklam', description: 'Ajans, yayın, içerik üretimi' },
+                { id: 'consulting', title: 'Danışmanlık', description: 'Hukuk, muhasebe, yönetim danışmanlığı' },
+                { id: 'public', title: 'Kamu/STK', description: 'Devlet kurumları, sivil toplum' },
+                { id: 'other-sector', title: 'Diğer', description: '', isOther: true }
+            ]
+        },
+        {
+            id: 'team-size',
             type: 'single-select',
-            question: 'Hafızan kuvvetli olsa da, hiç şöyle bir an yaşadın mı?',
+            question: 'Birlikte çalıştığınız/yönettiğiniz ekip kaç kişiden oluşuyor?',
             options: [
-                { id: 'forgot-detail', title: 'Önemli bir detayı unutup son anda panik yaşadım' },
-                { id: 'stress', title: 'Yapacaklarım kafamda birikince uyuyamadım / stres oldum' },
-                { id: 'promise', title: 'Başkasına verdiğim bir sözü unutup mahcup oldum' },
-                { id: 'juggling', title: 'Birden fazla işi aynı anda halletmeye çalışırken birini unuttum' },
-                { id: 'never', title: 'Hayır, ben gerçekten bir robotum. Asla unutmam.' }
+                { id: 'solo', title: 'Sadece ben (bireysel)', description: 'Tek başıma çalışıyorum' },
+                { id: 'small', title: '2-5 kişi', description: 'Küçük bir ekibim var' },
+                { id: 'medium', title: '6-15 kişi', description: 'Orta büyüklükte ekip' },
+                { id: 'large', title: '16-50 kişi', description: 'Büyük departman veya şirket' },
+                { id: 'enterprise', title: '50+ kişi', description: 'Kurumsal yapı' }
             ]
         },
         {
-            id: 'persuasion',
-            type: 'multi-select',
-            question: 'Mevcut karışık uygulamaları unut. Şöyle bir şey olsa fikrin değişir miydi?',
+            id: 'role',
+            type: 'single-select',
+            question: 'Ekibinizde veya işinizde hangi rolü üstleniyorsunuz?',
             options: [
-                { id: 'voice', title: 'Sesli Asistan', description: 'Yazmakla uğraşmasan, sen söylesen o anlasa?' },
-                { id: 'ultra-simple', title: 'Ultra Basitlik', description: 'Sadece tek tuş, girmesi 1 saniye sürse?' },
-                { id: 'whatsapp-like', title: 'WhatsApp Gibi', description: 'Arkadaşıma yazar gibi yazabilsem?' },
-                { id: 'smart-reminder', title: 'Akıllı Hatırlatma', description: 'Benim yerime düşünüp önerilerde bulunsa?' },
-                { id: 'gamification', title: 'Oyunlaştırma', description: 'Görev yaptıkça seviye atlasam?' },
-                { id: 'no-change', title: 'Sanırım değişmez', description: 'Ben kaossuz yapamam.' }
+                { id: 'member', title: 'Ekip üyesi/Çalışan', description: 'Görevleri uygulayan pozisyondayım' },
+                { id: 'team-lead', title: 'Takım lideri/Supervisor', description: 'Küçük bir ekibi yönetiyorum' },
+                { id: 'pm', title: 'Proje yöneticisi', description: 'Projeleri planlayıp yürütüyorum' },
+                { id: 'dept-manager', title: 'Departman yöneticisi', description: 'Bir departmanı yönetiyorum' },
+                { id: 'c-level', title: 'Üst düzey yönetici (C-level)', description: 'CEO, CTO, CFO gibi pozisyonlar' },
+                { id: 'founder', title: 'Kurucu/Sahip', description: 'Şirketin sahibi veya kurucusuyum' }
             ]
         }
     ],
 
-    commonQuestions: {
-        noteTaker: [
-            {
-                id: 'essential-features',
-                type: 'multi-select',
-                question: 'Şu an kullandığın aracı henüz silmemiş olmanın nedenleri neler?',
-                options: [
-                    { id: 'speed', title: 'Hız', description: 'Saniyeler içinde not alabiliyorum.' },
-                    { id: 'integration', title: 'Entegrasyon', description: 'Takvimimle ve maillerimle konuşuyor.' },
-                    { id: 'visual', title: 'Görsellik', description: 'O kadar güzel görünüyor ki.' },
-                    { id: 'notifications', title: 'Dürtmesi', description: 'Sürekli hatırlatıyor.' },
-                    { id: 'sharing', title: 'Paylaşım', description: 'Başkasına iş atmak çok kolay.' },
-                    { id: 'access', title: 'Her Yerden Erişim', description: 'Her yerden ulaşabiliyorum.' },
-                    { id: 'free', title: 'Ücretsiz', description: 'Para ödemeden kullanabiliyorum.' }
-                ]
-            }
-        ],
-        all: [
-            {
-                id: 'pain-points',
-                type: 'multi-select',
-                question: 'Mevcut yönteminde seni en çok ne yoruyor?',
-                options: [
-                    { id: 'slow', title: 'Hantallik / Yavaşlık', description: 'Veri girmek çok uzun sürüyor.' },
-                    { id: 'visual-chaos', title: 'Görsel Karmaşa', description: 'İstediğim yapıyı vermiyor.' },
-                    { id: 'scattered', title: 'Dağınıklık', description: 'Her şey başka başka yerlerde.' },
-                    { id: 'big-picture', title: 'Büyük Resmi Görememek', description: 'Listede boğuluyorum.' },
-                    { id: 'notification-blindness', title: 'Bildirim Körlüğü', description: 'Çok bildirim geliyor.' },
-                    { id: 'integration-gap', title: 'Kopukluk', description: 'Farklı araçlar birbirinden habersiz.' },
-                    { id: 'pricing', title: 'Fiyatlandırma', description: 'Bedava sürüm çok kısıtlı.' },
-                    { id: 'inflexible', title: 'Esneklik Yok', description: 'Hem basit liste hem proje yönetimi yapamıyorum.' }
-                ]
-            },
-            {
-                id: 'pain-detail',
-                type: 'open-text',
-                introText: 'Geldik en önemli soruya...',
-                question: 'Kullandığın araçta seni en çok "gıcık" eden şey ne?',
-                subtext: '(Her şey olabilir: yavaşlık, karmaşıklık, eksik özellik...)',
-                placeholder: 'Örneğin: "Jira çok yavaş açılıyor", "Notion telefonda hantal"...'
-            },
-            {
-                id: 'dream-features',
-                type: 'ranking',
-                question: 'Sihirli değneğin var. 3 "Süper Güç" ekleyeceksin. Önem sırasına göre seç!',
-                subtext: '(İlk seçtiğin en önemli, 3 tane seç)',
-                options: [
-                    { id: 'context-smart', title: 'Bağlam Zekası', description: '"Login hatası" yazdığımda Bug olduğunu anlasın.' },
-                    { id: 'light-speed', title: 'Işık Hızı', description: 'Komut satırı gibi görev girebileim.' },
-                    { id: 'auto-roadmap', title: 'Oto-Roadmap', description: 'Görevleri girdikçe yol haritası çıkarsın.' },
-                    { id: 'simplicity', title: 'Sadelik', description: 'Sadece o an yapmam gereken işi göstersin.' },
-                    { id: 'modular-view', title: 'Modüler Görünüm', description: 'Tek tuşla Liste\'den Kanban\'a geçebileim.' },
-                    { id: 'gamification', title: 'Oyunlaştırma', description: 'Görev yaptıkça seviye atlayım.' },
-                    { id: 'smart-analysis', title: 'Akıllı Analiz', description: 'Haftamı nasıl geçirdiğimi raporlasın.' }
-                ]
-            }
+    filterQuestion: {
+        id: 'task-tracking',
+        type: 'single-select',
+        question: 'Yapacağın işleri veya görevleri bir yere yazıyor/kaydediyor musun?',
+        options: [
+            { id: 'digital', title: 'Evet, dijital araç kullanıyorum', description: 'Uygulama, program veya online araç' },
+            { id: 'paper', title: 'Evet, kağıt/defter kullanıyorum', description: 'Fiziksel not defteri, ajanda, post-it' },
+            { id: 'both', title: 'Her ikisini de kullanıyorum', description: 'Hem dijital hem fiziksel yöntemler' },
+            { id: 'irregular', title: 'Bazen yazıyorum, düzensiz', description: 'Tutarlı bir sistemim yok' },
+            { id: 'memory', title: 'Hayır, aklımda tutuyorum', description: 'Genelde yazma ihtiyacı duymuyorum' }
         ]
-    }
+    },
+
+    userPath: [
+        {
+            id: 'tools-used',
+            type: 'multi-select',
+            maxSelect: 3,
+            question: 'Hangi araçları kullanıyorsunuz veya daha önce kullandınız?',
+            subtext: '(En fazla 3 seçim yapabilirsiniz)',
+            options: [
+                { id: 'notion', title: 'Notion', description: 'Not alma, dokümantasyon ve görev yönetimi bir arada' },
+                { id: 'trello', title: 'Trello', description: 'Görsel kanban panoları ile basit yönetim' },
+                { id: 'asana', title: 'Asana', description: 'Proje ve görev takibi için kurumsal çözüm' },
+                { id: 'monday', title: 'Monday.com', description: 'Renkli ve görsel iş yönetimi platformu' },
+                { id: 'clickup', title: 'ClickUp', description: 'Her şeyi yapabilen kapsamlı platform' },
+                { id: 'jira', title: 'Jira', description: 'Yazılım geliştirme ve sprint yönetimi' },
+                { id: 'todoist', title: 'Todoist', description: 'Basit ve hızlı kişisel görev listesi' },
+                { id: 'ms-todo', title: 'Microsoft To Do', description: 'Windows ve Outlook ile entegre liste' },
+                { id: 'google-tasks', title: 'Google Tasks', description: 'Gmail ve Calendar ile entegre basit liste' },
+                { id: 'apple-reminders', title: 'Apple Reminders', description: 'iPhone ve Mac için varsayılan hatırlatıcı' },
+                { id: 'linear', title: 'Linear', description: 'Modern ve hızlı yazılım proje yönetimi' },
+                { id: 'basecamp', title: 'Basecamp', description: 'Ekip iletişimi ve proje yönetimi bir arada' },
+                { id: 'paper-notebook', title: 'Kağıt/Defter', description: 'Fiziksel not defteri veya ajanda' },
+                { id: 'excel-sheets', title: 'Excel/Sheets', description: 'Tablo programları ile manuel takip' },
+                { id: 'other-tool', title: 'Diğer', description: '', isOther: true }
+            ]
+        },
+        {
+            id: 'liked-features',
+            type: 'multi-select',
+            maxSelect: 3,
+            question: 'Şu anda kullandığınız araçta en çok kullandığınız şey ne?',
+            subtext: '(En fazla 3 seçim yapabilirsiniz)',
+            options: [
+                { id: 'quick-add', title: 'Hızlı görev ekleme', description: 'Saniyeler içinde yeni görev girebiliyorum' },
+                { id: 'calendar-integration', title: 'Takvim entegrasyonu', description: 'Görevlerimi takvimimde görebiliyorum' },
+                { id: 'reminders', title: 'Hatırlatıcılar/Bildirimler', description: 'Zamanında uyarı alıyorum' },
+                { id: 'kanban', title: 'Kanban/Board görünümü', description: 'Sürükle-bırak ile organize edebiliyorum' },
+                { id: 'subtasks', title: 'Alt görevler/Checklist', description: 'Büyük işleri parçalara bölebiliyorum' },
+                { id: 'tags', title: 'Etiketler/Kategoriler', description: 'Renk ve etiketlerle organize edebiliyorum' },
+                { id: 'mobile', title: 'Mobil uygulama', description: 'Telefonumdan da kullanabiliyorum' },
+                { id: 'sharing', title: 'Ekip paylaşımı', description: 'Başkalarına görev atayabiliyorum' },
+                { id: 'recurring', title: 'Tekrarlayan görevler', description: 'Rutin işleri otomatik oluşturuyor' },
+                { id: 'attachments', title: 'Dosya ekleme', description: 'Görevlere dosya/link ekleyebiliyorum' },
+                { id: 'search', title: 'Arama/Filtreleme', description: 'İstediğimi hızlıca bulabiliyorum' },
+                { id: 'offline', title: 'Offline çalışma', description: 'İnternet olmadan da kullanabiliyorum' },
+                { id: 'nice-ui', title: 'Güzel/Modern arayüz', description: 'Kullanması keyifli, estetik' },
+                { id: 'free', title: 'Ücretsiz olması', description: 'Para ödemeden kullanabiliyorum' }
+            ]
+        },
+        {
+            id: 'satisfaction',
+            type: 'single-select',
+            question: 'Şu anda kullandığınız araçtan ne kadar memnunsunuz?',
+            options: [
+                { id: 'very-satisfied', title: 'Çok memnunum', description: 'Tam aradığım gibi, değiştirmem' },
+                { id: 'satisfied', title: 'Memnunum', description: 'İdare ediyor ama mükemmel değil' },
+                { id: 'neutral', title: 'Ne memnunum ne değilim', description: 'Bazı şeyler iyi, bazıları kötü' },
+                { id: 'unsatisfied', title: 'Memnun değilim', description: 'Eksikleri çok, alternatif arıyorum' },
+                { id: 'very-unsatisfied', title: 'Hiç memnun değilim', description: 'Kullanmak zorunda kaldığım için kullanıyorum' }
+            ]
+        }
+    ],
+
+    nonUserPath: [
+        {
+            id: 'non-use-reasons',
+            type: 'multi-select',
+            maxSelect: 3,
+            question: 'Dijital görev yönetimi aracı kullanmama nedeniniz nedir?',
+            subtext: '(En fazla 3 seçim yapabilirsiniz)',
+            options: [
+                { id: 'current-method-ok', title: 'Mevcut yöntemim yeterli', description: 'Kağıt, not defteri veya zihnimle idare ediyorum' },
+                { id: 'too-complex', title: 'Denediklerim çok karmaşıktı', description: 'Öğrenmesi ve kullanması zor geldi' },
+                { id: 'expensive', title: 'Fiyatlar çok yüksek', description: 'İstediğim özellikleri ücretsiz bulamadım' },
+                { id: 'team-uses-other', title: 'Ekibim/şirketim farklı araç kullanıyor', description: 'Şirket başka bir şey dayatıyor' },
+                { id: 'cant-decide', title: 'Hangi aracı seçeceğimi bilmiyorum', description: 'Çok fazla seçenek var, karar veremedim' },
+                { id: 'security-concern', title: 'Veri güvenliği endişelerim var', description: 'Bilgilerimi buluta koymak istemiyorum' },
+                { id: 'no-turkish', title: 'Türkçe arayüz bulamadım', description: 'Yabancı dilde kullanmak zor' },
+                { id: 'no-need', title: 'İhtiyacım yok', description: 'İşlerim o kadar karmaşık değil' },
+                { id: 'other-reason', title: 'Diğer', description: '', isOther: true }
+            ]
+        },
+        {
+            id: 'pain-experiences',
+            type: 'multi-select',
+            maxSelect: 3,
+            question: 'Hiç şöyle bir durum yaşadınız mı?',
+            subtext: '(En fazla 3 seçim yapabilirsiniz)',
+            options: [
+                { id: 'forgot-task', title: 'Önemli bir işi/toplantıyı unuttum', description: 'Son anda hatırlayıp panik yaptım' },
+                { id: 'missed-deadline', title: 'Deadline kaçırdım', description: 'Teslim tarihini geçtim' },
+                { id: 'duplicate-work', title: 'Aynı işi iki kez yaptım', description: 'Daha önce yaptığımı unuttum' },
+                { id: 'broke-promise', title: 'Birine verdiğim sözü unuttum', description: 'Söylediğim şeyi yapmadım' },
+                { id: 'mental-overload', title: 'Yapacaklarım kafamda birikti', description: 'Stres oldum, uyuyamadım' },
+                { id: 'wrong-priority', title: 'Önceliği yanlış belirledim', description: 'Önemli işi erteleyip gereksiz iş yaptım' },
+                { id: 'team-collision', title: 'Ekip arkadaşımla iş çakıştı', description: 'Kim ne yapacak belli değildi' },
+                { id: 'lost-progress', title: 'Projenin ne durumda olduğunu unuttum', description: 'Nerede kaldığımı hatırlayamadım' },
+                { id: 'none', title: 'Bunların hiçbirini yaşamadım', description: 'İşlerimi sorunsuz yönetiyorum' }
+            ]
+        }
+    ],
+
+    painPoints: [
+        {
+            id: 'biggest-challenges',
+            type: 'multi-select',
+            maxSelect: 3,
+            question: 'Görev ve iş süreçlerinizi yönetirken en çok hangi zorluklarla karşılaşıyorsunuz?',
+            subtext: '(En fazla 3 seçim yapabilirsiniz)',
+            options: [
+                { id: 'prioritization', title: 'Görevlerin önceliklendirilmesi', description: 'Hangisini önce yapacağıma karar vermek zor' },
+                { id: 'deadline-tracking', title: 'Deadline\'ları takip etme', description: 'Teslim tarihlerini kaçırıyorum' },
+                { id: 'team-coordination', title: 'Ekiple koordinasyon ve iletişim', description: 'Kimin ne yaptığını bilmek zor' },
+                { id: 'multi-project', title: 'Birden fazla projeyi aynı anda yönetme', description: 'Her şey birbirine karışıyor' },
+                { id: 'progress-visibility', title: 'İlerleme durumunu görüntüleme', description: 'Ne kadar iş kaldığını göremiyorum' },
+                { id: 'automation', title: 'Tekrarlayan görevleri otomatikleştirme', description: 'Aynı işleri manuel tekrarlamak yorucu' },
+                { id: 'tool-switching', title: 'Farklı araçlar arasında geçiş yapma', description: 'Her şey farklı yerlerde dağınık' },
+                { id: 'meeting-balance', title: 'Toplantı ve görev dengesini kurma', description: 'Toplantılar arasında iş yapamıyorum' },
+                { id: 'remote-sync', title: 'Uzaktan ekip üyeleriyle senkronizasyon', description: 'Ekiple aynı anda bilgi alamıyorum' },
+                { id: 'reporting', title: 'Üst yönetime raporlama', description: 'Durumu özetlemek zaman alıyor' },
+                { id: 'time-estimation', title: 'Zaman tahmini yapma', description: 'İşlerin ne kadar süreceğini bilmiyorum' },
+                { id: 'motivation', title: 'Motivasyon eksikliği', description: 'Erteleme alışkanlığım var' },
+                { id: 'other-challenge', title: 'Diğer', description: '', isOther: true }
+            ]
+        },
+        {
+            id: 'tool-complaints',
+            type: 'multi-select',
+            maxSelect: 3,
+            question: 'Kullandığınız veya denediğiniz araçlarda sizi en çok rahatsız eden özellikler nelerdi?',
+            subtext: '(En fazla 3 seçim yapabilirsiniz)',
+            options: [
+                { id: 'too-complex', title: 'Çok karmaşık/öğrenmesi zor', description: 'Kullanmayı öğrenmek saatler aldı' },
+                { id: 'slow', title: 'Yavaş ve ağır çalışıyor', description: 'Sayfa geçişleri çok uzun sürüyor' },
+                { id: 'bad-mobile', title: 'Mobil uygulaması yetersiz', description: 'Telefonda kullanmak imkansız' },
+                { id: 'no-turkish', title: 'Türkçe dil desteği yok/kötü', description: 'Menüler ve açıklamalar İngilizce' },
+                { id: 'expensive', title: 'Fiyatı çok yüksek', description: 'Temel özellikler bile paralı' },
+                { id: 'poor-integrations', title: 'Entegrasyonlar yetersiz', description: 'Kullandığım araçlarla bağlanmıyor' },
+                { id: 'no-customization', title: 'Özelleştirme seçenekleri az', description: 'İstediğim gibi düzenleyemiyorum' },
+                { id: 'no-offline', title: 'Offline çalışmıyor', description: 'İnternet olmadan hiç kullanılmıyor' },
+                { id: 'noisy-notifications', title: 'Bildirimler bunaltıcı', description: 'Çok fazla gereksiz uyarı geliyor' },
+                { id: 'ugly-ui', title: 'Arayüz eski/çirkin', description: 'Görsel olarak itici' },
+                { id: 'bad-export', title: 'Veri export/import zor', description: 'Bilgilerimi dışarı alamıyorum' },
+                { id: 'bad-support', title: 'Müşteri desteği kötü', description: 'Yardım istediğimde cevap alamıyorum' },
+                { id: 'security-concerns', title: 'Güvenlik/gizlilik endişeleri', description: 'Verilerimin ne olduğunu bilmiyorum' },
+                { id: 'none-complaints', title: 'Hiçbiri', description: 'Halimden çok memnunum' },
+                { id: 'other-complaint', title: 'Diğer', description: '', isOther: true }
+            ]
+        },
+        {
+            id: 'switch-barriers',
+            type: 'multi-select',
+            maxSelect: 3,
+            question: 'Yeni bir görev yönetimi aracına geçmeyi zorlaştıran faktörler neler?',
+            subtext: '(En fazla 3 seçim yapabilirsiniz)',
+            options: [
+                { id: 'data-migration', title: 'Mevcut verilerimi taşımak zor', description: 'Yılların birikimi kaybolabilir' },
+                { id: 'learning-curve', title: 'Yeni aracı öğrenmek vakit alır', description: 'Öğrenme eğrisi yüksek' },
+                { id: 'team-convincing', title: 'Ekibi ikna etmek zor', description: 'Herkes alıştığını kullanmak istiyor' },
+                { id: 'company-decides', title: 'Şirket/yönetici karar veriyor', description: 'Ben seçmiyorum' },
+                { id: 'choice-fatigue', title: 'Doğru aracı bulmak yorucu', description: 'Çok fazla seçenek var' },
+                { id: 'good-enough', title: 'Mevcut aracım "yeterince iyi"', description: 'Mükemmel değil ama idare ediyor' },
+                { id: 'cost', title: 'Ücretli planlar pahalı', description: 'Bütçem kısıtlı' },
+                { id: 'integration-break', title: 'Entegrasyonlarım bozulur', description: 'Diğer araçlarla bağlantı kopar' },
+                { id: 'trial-short', title: 'Deneme süresi yetmiyor', description: 'Karar vermeden süre doluyor' },
+                { id: 'no-barrier', title: 'Bu konuda engel hissetmiyorum', description: 'İstesem kolayca değiştirebilirim' }
+            ]
+        }
+    ],
+
+    featurePreferences: [
+        {
+            id: 'feature-priorities',
+            type: 'multi-select',
+            maxSelect: 3,
+            question: 'Aşağıdaki özelliklerden sizin için en önemli 3 tanesini seçin.',
+            subtext: '(En fazla 3 seçim yapabilirsiniz)',
+            options: [
+                { id: 'simple-ui', title: 'Basit ve sezgisel arayüz', description: 'Öğrenmesi ve kullanması kolay' },
+                { id: 'turkish', title: 'Türkçe dil desteği', description: 'Tüm menüler ve yardım Türkçe' },
+                { id: 'mobile-app', title: 'Mobil uygulama', description: 'iPhone ve Android uygulaması' },
+                { id: 'offline', title: 'Offline çalışabilme', description: 'İnternet olmadan da kullanım' },
+                { id: 'collaboration', title: 'Ekip işbirliği araçları', description: 'Birlikte çalışma özellikleri' },
+                { id: 'calendar', title: 'Takvim entegrasyonu', description: 'Google/Outlook takvim bağlantısı' },
+                { id: 'time-tracking', title: 'Zaman takibi', description: 'İşlere harcanan süreyi ölçme' },
+                { id: 'ai-suggestions', title: 'AI destekli öneriler', description: 'Yapay zeka ile akıllı öneriler' },
+                { id: 'reporting', title: 'Detaylı raporlama', description: 'Grafikler ve analizler' },
+                { id: 'custom-workflows', title: 'Özelleştirilebilir iş akışları', description: 'Kendi süreçlerimi kurabilme' },
+                { id: 'file-sharing', title: 'Dosya paylaşımı', description: 'Dokümanları göreve ekleme' },
+                { id: 'notification-mgmt', title: 'Bildirim yönetimi', description: 'Hangi uyarıları alacağımı seçme' },
+                { id: 'recurring-tasks', title: 'Tekrarlayan görev otomasyonu', description: 'Rutin işlerin otomatik oluşması' },
+                { id: 'integrations', title: 'Diğer araçlarla entegrasyon', description: 'Slack, Jira vb. ile bağlantı' }
+            ]
+        },
+        {
+            id: 'usp-motivation',
+            type: 'single-select',
+            question: 'Aşağıdaki özelliklerden hangisi sizi yeni bir araca geçmeye en çok motive eder?',
+            options: [
+                { id: 'simplicity', title: 'Gerçekten basit, 5 dakikada öğrenilebilen bir arayüz', description: '5 dakikada öğrenebileceğim' },
+                { id: 'turkish-support', title: 'Tam Türkçe destek ve yerel müşteri hizmeti', description: 'Yerel müşteri hizmeti dahil' },
+                { id: 'ai-priority', title: 'Yapay zeka ile otomatik görev önceliklendirme', description: 'AI neyi önce yapmam gerektiğini söylesin' },
+                { id: 'integrations', title: 'Tüm popüler araçlarla tek tıkla entegrasyon', description: 'Tüm araçlarımla anında bağlansın' },
+                { id: 'fair-pricing', title: 'Şeffaf ve uygun fiyatlandırma', description: 'Gizli maliyet olmadan uygun fiyat' },
+                { id: 'offline-sync', title: 'Offline çalışma ve hızlı senkronizasyon', description: 'İnternetsiz çalışıp sonra senkronize etsin' }
+            ]
+        }
+    ]
 };
 
 // Survey State
 let surveyState = {
     currentStepIndex: 0,
     answers: {},
+    otherTexts: {},
     isComplete: false,
     direction: 'forward'
 };
@@ -399,59 +301,39 @@ let surveyState = {
 // n8n webhook URL'inizi buraya ekleyin
 const SURVEY_WEBHOOK_URL = 'https://n8n.carettask.com/webhook/carettask-survey';
 
-// Normalize profile-specific answers to unified column names
-function normalizeAnswers(answers) {
-    const profile = answers['profile'] || 'unknown';
-
-    // Profile suffixes mapping
-    const profileSuffixes = {
-        'tech-lead': 'tech',
-        'entrepreneur': 'entrepreneur',
-        'academic': 'academic',
-        'corporate': 'corporate',
-        'student': 'student',
-        'creative': 'creative'
-    };
-
-    const suffix = profileSuffixes[profile] || profile;
-
+// Normalize answers to unified column names
+function normalizeAnswers(answers, otherTexts) {
     return {
-        profile: profile,
-        behavior: answers['behavior'] || '',
-        content_selections: answers[`content-${suffix}`] || [],
-        view_preferences: answers[`view-${suffix}`] || [],
-        tools_used: answers[`tools-${suffix}`] || [],
-        essential_features: answers['essential-features'] || [],
-        pain_points: answers['pain-points'] || [],
-        pain_detail: answers['pain-detail'] || '',
-        dream_features: answers['dream-features'] || [],
-        // Non-note-taker specific fields
-        barrier: answers['barrier'] || [],
-        pain_recognition: answers['pain-recognition'] || '',
-        persuasion: answers['persuasion'] || [],
-        email: answers['email'] || 'skipped'
+        work_status: answers['work-status'] || [],
+        sector: answers['sector'] || [],
+        team_size: answers['team-size'] || '',
+        role: answers['role'] || '',
+        task_tracking: answers['task-tracking'] || '',
+        // User path
+        tools_used: answers['tools-used'] || [],
+        liked_features: answers['liked-features'] || [],
+        satisfaction: answers['satisfaction'] || '',
+        // Non-user path
+        non_use_reasons: answers['non-use-reasons'] || [],
+        pain_experiences: answers['pain-experiences'] || [],
+        // Common
+        biggest_challenges: answers['biggest-challenges'] || [],
+        tool_complaints: answers['tool-complaints'] || [],
+        switch_barriers: answers['switch-barriers'] || [],
+        feature_priorities: answers['feature-priorities'] || [],
+        usp_motivation: answers['usp-motivation'] || '',
+        email: answers['email'] || 'skipped',
+        other_texts: otherTexts || {}
     };
 }
 
 // Submit survey data to webhook
 async function submitSurveyToWebhook() {
     // Normalize answers to unified column names
-    const normalizedAnswers = normalizeAnswers(surveyState.answers);
+    const normalizedAnswers = normalizeAnswers(surveyState.answers, surveyState.otherTexts);
 
     const surveyData = {
-        email: normalizedAnswers.email,
-        profile: normalizedAnswers.profile,
-        behavior: normalizedAnswers.behavior,
-        content_selections: normalizedAnswers.content_selections,
-        view_preferences: normalizedAnswers.view_preferences,
-        tools_used: normalizedAnswers.tools_used,
-        essential_features: normalizedAnswers.essential_features,
-        pain_points: normalizedAnswers.pain_points,
-        pain_detail: normalizedAnswers.pain_detail,
-        dream_features: normalizedAnswers.dream_features,
-        barrier: normalizedAnswers.barrier,
-        pain_recognition: normalizedAnswers.pain_recognition,
-        persuasion: normalizedAnswers.persuasion,
+        ...normalizedAnswers,
         // Keep raw answers for debugging
         raw_answers: { ...surveyState.answers },
         submittedAt: new Date().toISOString(),
@@ -518,11 +400,11 @@ async function submitSurveyToWebhook() {
     }
 }
 
-// Get user path (note-taker or non-note-taker)
+// Get user path (user or non-user of digital tools)
 function getUserPath() {
-    const behavior = surveyState.answers['behavior'];
-    if (!behavior) return null;
-    return (behavior === 'always-write' || behavior === 'sometimes-write') ? 'note-taker' : 'non-note-taker';
+    const tracking = surveyState.answers['task-tracking'];
+    if (!tracking) return null;
+    return (tracking === 'digital' || tracking === 'both') ? 'user' : 'non-user';
 }
 
 // Build steps based on answers
@@ -532,45 +414,24 @@ function buildSteps() {
     // Intro
     steps.push({ id: 'intro', type: 'intro' });
 
-    // Profile selection
-    steps.push({
-        id: 'profile',
-        type: 'single-select',
-        question: 'Sahnedeki rolün ne? Günün büyük kısmı hangi şapkayı takarak geçiyor?',
-        options: Object.entries(surveyConfig.profiles).map(([id, data]) => ({
-            id,
-            title: data.title,
-            description: data.description,
-            emoji: data.emoji
-        }))
-    });
+    // Demographics (4 questions)
+    steps.push(...surveyConfig.demographics);
 
-    // Behavior split
-    steps.push({
-        id: 'behavior',
-        type: 'single-select',
-        question: 'Dürüst olalım: Gün içinde aklına gelen o kritik işi veya fikri ne yapıyorsun?',
-        options: surveyConfig.behaviors
-    });
+    // Filter question (branching point)
+    steps.push(surveyConfig.filterQuestion);
 
-    const profile = surveyState.answers['profile'];
     const path = getUserPath();
 
-    if (path === 'note-taker' && profile) {
-        // Profile-specific questions
-        const profileQuestions = surveyConfig.profileQuestions[profile] || [];
-        steps.push(...profileQuestions);
-    } else if (path === 'non-note-taker') {
-        // Non-note-taker questions
-        steps.push(...surveyConfig.nonNoteTakerQuestions);
+    if (path === 'user') {
+        steps.push(...surveyConfig.userPath);
+    } else if (path === 'non-user') {
+        steps.push(...surveyConfig.nonUserPath);
     }
 
-    // Common questions
+    // Common pain points and feature preferences (after branching)
     if (path) {
-        if (path === 'note-taker') {
-            steps.push(...surveyConfig.commonQuestions.noteTaker);
-        }
-        steps.push(...surveyConfig.commonQuestions.all);
+        steps.push(...surveyConfig.painPoints);
+        steps.push(...surveyConfig.featurePreferences);
     }
 
     // Email and Success
@@ -607,12 +468,6 @@ function canProceed() {
     }
     if (currentStep.type === 'multi-select') {
         return Array.isArray(answer) && answer.length > 0;
-    }
-    if (currentStep.type === 'ranking') {
-        return Array.isArray(answer) && answer.length === 3;
-    }
-    if (currentStep.type === 'open-text') {
-        return typeof answer === 'string' && answer.trim().length > 0;
     }
 
     return false;
@@ -657,12 +512,6 @@ function renderSurveyModal() {
             break;
         case 'multi-select':
             contentHTML += renderMultiSelect(currentStep);
-            break;
-        case 'ranking':
-            contentHTML += renderRanking(currentStep);
-            break;
-        case 'open-text':
-            contentHTML += renderOpenText(currentStep);
             break;
         case 'email':
             contentHTML += renderEmailScreen();
@@ -746,6 +595,8 @@ function renderSingleSelect(step) {
 
 function renderMultiSelect(step) {
     const selectedValues = surveyState.answers[step.id] || [];
+    const maxSelect = step.maxSelect || null;
+    const maxText = maxSelect ? `/${maxSelect}` : '';
 
     return `
         <div class="survey-screen question-screen">
@@ -753,77 +604,39 @@ function renderMultiSelect(step) {
             <h2>${step.question}</h2>
             <p class="survey-subtext">${step.subtext || '(Birden fazla seçebilirsin)'}</p>
             <div class="survey-options">
-                ${step.options.map(option => `
-                    <button class="survey-option ${selectedValues.includes(option.id) ? 'selected' : ''}"
-                            onclick="toggleMultiOption('${step.id}', '${option.id}')">
-                        <div class="option-checkbox ${selectedValues.includes(option.id) ? 'checked' : ''}">
-                            ${selectedValues.includes(option.id) ? `
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                </svg>
-                            ` : ''}
-                        </div>
-                        <div class="option-content">
-                            <div class="option-title">${option.title}</div>
-                            ${option.description ? `<div class="option-description">${option.description}</div>` : ''}
-                        </div>
-                    </button>
-                `).join('')}
-            </div>
-            ${selectedValues.length > 0 ? `<div class="survey-selection-count">${selectedValues.length} öğe seçildi</div>` : ''}
-        </div>
-    `;
-}
-
-function renderRanking(step) {
-    const rankedValues = surveyState.answers[step.id] || [];
-
-    const getRank = (optionId) => {
-        const index = rankedValues.indexOf(optionId);
-        return index >= 0 ? index + 1 : null;
-    };
-
-    return `
-        <div class="survey-screen question-screen">
-            <div class="survey-emoji">🪄</div>
-            <h2>${step.question}</h2>
-            <p class="survey-subtext">${step.subtext}</p>
-            <div class="survey-options">
                 ${step.options.map(option => {
-                    const rank = getRank(option.id);
+                    const isSelected = selectedValues.includes(option.id);
+                    const isOther = option.isOther || false;
+                    const otherText = surveyState.otherTexts[option.id] || '';
+
                     return `
-                        <button class="survey-option ${rank !== null ? 'selected' : ''}"
-                                onclick="toggleRankingOption('${step.id}', '${option.id}')">
-                            ${rank !== null ? `
-                                <div class="option-rank">${rank}</div>
-                            ` : `
-                                <div class="option-rank-empty"></div>
-                            `}
+                    <div class="survey-option-wrapper">
+                        <button class="survey-option ${isSelected ? 'selected' : ''} ${isOther && isSelected ? 'survey-option-other-active' : ''}"
+                                onclick="toggleMultiOption('${step.id}', '${option.id}', ${maxSelect || 'null'}, ${isOther})">
+                            <div class="option-checkbox ${isSelected ? 'checked' : ''}">
+                                ${isSelected ? `
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                ` : ''}
+                            </div>
                             <div class="option-content">
-                                <div class="option-title">${option.title}</div>
-                                ${option.description ? `<div class="option-description">${option.description}</div>` : ''}
+                                ${isOther && isSelected ? `
+                                    <input type="text" class="survey-other-input" placeholder="${option.title}: Lütfen belirtiniz..."
+                                           value="${otherText}"
+                                           oninput="updateOtherText('${option.id}', this.value)"
+                                           onclick="event.stopPropagation()">
+                                ` : `
+                                    <div class="option-title">${option.title}</div>
+                                    ${option.description ? `<div class="option-description">${option.description}</div>` : ''}
+                                `}
                             </div>
                         </button>
+                    </div>
                     `;
                 }).join('')}
             </div>
-            <div class="survey-selection-count">${rankedValues.length}/3 seçildi</div>
-        </div>
-    `;
-}
-
-function renderOpenText(step) {
-    const value = surveyState.answers[step.id] || '';
-
-    return `
-        <div class="survey-screen question-screen">
-            <div class="survey-emoji">😤</div>
-            ${step.introText ? `<p class="survey-intro-text">${step.introText}</p>` : ''}
-            <h2>${step.question}</h2>
-            ${step.subtext ? `<p class="survey-subtext">${step.subtext}</p>` : ''}
-            <textarea class="survey-textarea"
-                      placeholder="${step.placeholder || 'Buraya yazın...'}"
-                      oninput="updateOpenText('${step.id}', this.value)">${value}</textarea>
+            ${selectedValues.length > 0 ? `<div class="survey-selection-count">${selectedValues.length}${maxText} seçildi</div>` : ''}
         </div>
     `;
 }
@@ -897,21 +710,44 @@ function selectSingleOption(stepId, optionId) {
     updateNavButtonState();
 }
 
-function toggleMultiOption(stepId, optionId) {
+function toggleMultiOption(stepId, optionId, maxSelect, isOther) {
     const current = surveyState.answers[stepId] || [];
+
     if (current.includes(optionId)) {
+        // Deselect
         surveyState.answers[stepId] = current.filter(id => id !== optionId);
+        // Clear other text if deselecting an "other" option
+        if (isOther) {
+            delete surveyState.otherTexts[optionId];
+        }
     } else {
+        // Check max limit before adding
+        if (maxSelect && current.length >= maxSelect) {
+            showMaxWarning(maxSelect, optionId);
+            return;
+        }
         surveyState.answers[stepId] = [...current, optionId];
+    }
+
+    // For "other" options, re-render to show/hide text input
+    if (isOther) {
+        renderSurveyModal();
+        // Focus the text input if it was just selected
+        if (surveyState.answers[stepId].includes(optionId)) {
+            setTimeout(() => {
+                const input = document.querySelector('.survey-other-input');
+                if (input) input.focus();
+            }, 50);
+        }
+        return;
     }
 
     const selectedValues = surveyState.answers[stepId];
 
     // Update UI without full re-render
-    const options = document.querySelectorAll('.survey-option');
-    options.forEach(option => {
+    document.querySelectorAll('.survey-option').forEach(option => {
         const onclickAttr = option.getAttribute('onclick') || '';
-        const match = onclickAttr.match(/toggleMultiOption\('[^']+',\s*'([^']+)'\)/);
+        const match = onclickAttr.match(/toggleMultiOption\('[^']+',\s*'([^']+)'/);
         if (match) {
             const thisOptionId = match[1];
             const isSelected = selectedValues.includes(thisOptionId);
@@ -932,85 +768,52 @@ function toggleMultiOption(stepId, optionId) {
     // Update selection count
     const countDiv = document.querySelector('.survey-selection-count');
     if (countDiv) {
-        countDiv.textContent = `${selectedValues.length} öğe seçildi`;
+        const maxText = maxSelect ? `/${maxSelect}` : '';
+        countDiv.textContent = `${selectedValues.length}${maxText} seçildi`;
         countDiv.style.display = selectedValues.length > 0 ? 'block' : 'none';
-    } else if (selectedValues.length > 0) {
-        const optionsContainer = document.querySelector('.survey-options');
-        if (optionsContainer) {
-            const newCountDiv = document.createElement('div');
-            newCountDiv.className = 'survey-selection-count';
-            newCountDiv.textContent = `${selectedValues.length} öğe seçildi`;
-            optionsContainer.parentNode.appendChild(newCountDiv);
-        }
     }
 
     // Update navigation button state
     updateNavButtonState();
 }
 
-function toggleRankingOption(stepId, optionId) {
-    const current = surveyState.answers[stepId] || [];
-    if (current.includes(optionId)) {
-        surveyState.answers[stepId] = current.filter(id => id !== optionId);
-    } else if (current.length < 3) {
-        surveyState.answers[stepId] = [...current, optionId];
-    }
+function updateOtherText(optionId, value) {
+    surveyState.otherTexts[optionId] = value;
+}
 
-    const rankedValues = surveyState.answers[stepId];
+function showMaxWarning(maxSelect, optionId) {
+    // Remove existing warning if any
+    const existing = document.querySelector('.survey-max-warning');
+    if (existing) existing.remove();
 
-    // Update UI without full re-render
-    const options = document.querySelectorAll('.survey-option');
-    options.forEach(option => {
-        const onclickAttr = option.getAttribute('onclick') || '';
-        const match = onclickAttr.match(/toggleRankingOption\('[^']+',\s*'([^']+)'\)/);
-        if (match) {
-            const thisOptionId = match[1];
-            const rankIndex = rankedValues.indexOf(thisOptionId);
-            const isSelected = rankIndex >= 0;
-            option.classList.toggle('selected', isSelected);
+    const warning = document.createElement('div');
+    warning.className = 'survey-max-warning';
+    warning.textContent = `En fazla ${maxSelect} seçim yapabilirsiniz.`;
 
-            const rankDiv = option.querySelector('.option-rank, .option-rank-empty');
-            if (rankDiv) {
-                if (isSelected) {
-                    rankDiv.className = 'option-rank';
-                    rankDiv.textContent = rankIndex + 1;
-                } else {
-                    rankDiv.className = 'option-rank-empty';
-                    rankDiv.textContent = '';
-                }
-            }
+    // Find the clicked option's wrapper by matching the optionId in onclick
+    const allOptions = document.querySelectorAll('.survey-option');
+    let targetWrapper = null;
+    allOptions.forEach(btn => {
+        const onclick = btn.getAttribute('onclick') || '';
+        if (onclick.includes(`'${optionId}'`)) {
+            targetWrapper = btn.closest('.survey-option-wrapper') || btn.parentNode;
         }
     });
 
-    // Update selection count
-    const countDiv = document.querySelector('.survey-selection-count');
-    if (countDiv) {
-        countDiv.textContent = `${rankedValues.length}/3 seçildi`;
+    if (targetWrapper) {
+        targetWrapper.appendChild(warning);
     }
 
-    // Update navigation button state
-    updateNavButtonState();
+    // Auto-remove after 2.5 seconds
+    setTimeout(() => {
+        if (warning.parentNode) warning.remove();
+    }, 2500);
 }
 
 function updateNavButtonState() {
     const nextBtn = document.querySelector('.survey-nav-next');
     if (nextBtn) {
         if (canProceed()) {
-            nextBtn.classList.remove('disabled');
-            nextBtn.disabled = false;
-        } else {
-            nextBtn.classList.add('disabled');
-            nextBtn.disabled = true;
-        }
-    }
-}
-
-function updateOpenText(stepId, value) {
-    surveyState.answers[stepId] = value;
-    // Don't re-render to avoid losing focus, just update nav state
-    const nextBtn = document.querySelector('.survey-nav-next');
-    if (nextBtn) {
-        if (value.trim().length > 0) {
             nextBtn.classList.remove('disabled');
             nextBtn.disabled = false;
         } else {
@@ -1124,6 +927,7 @@ function openSurveyModal() {
     surveyState = {
         currentStepIndex: 0,
         answers: {},
+        otherTexts: {},
         isComplete: false,
         direction: 'forward'
     };

@@ -12,6 +12,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Intersection Observer for animations
     initScrollAnimations();
+
+    // Coming soon links & language dropdown
+    initComingSoonLinks();
+    initLanguageDropdown();
 });
 
 // Cookie Banner Functions
@@ -278,7 +282,10 @@ function initHeaderScroll() {
 
         // Add shadow when scrolled
         if (currentScroll > 10) {
-            header.style.boxShadow = '0 2px 10px rgba(16, 42, 67, 0.1)';
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            header.style.boxShadow = isDark
+                ? '0 2px 10px rgba(0, 0, 0, 0.3)'
+                : '0 2px 10px rgba(16, 42, 67, 0.1)';
         } else {
             header.style.boxShadow = 'none';
         }
@@ -524,3 +531,80 @@ function submitAuthEmail() {
         <button class="auth-add-another-btn" onclick="showAddAnotherEmail()">Başka Mail Ekle</button>
     `;
 }
+
+// Coming Soon Toast
+function showComingSoonToast() {
+    const existing = document.querySelector('.coming-soon-toast');
+    if (existing) existing.remove();
+
+    const toast = document.createElement('div');
+    toast.className = 'coming-soon-toast';
+    toast.textContent = 'Çok yakında geliyor!';
+    document.body.appendChild(toast);
+
+    requestAnimationFrame(() => toast.classList.add('show'));
+
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 2500);
+}
+
+function initComingSoonLinks() {
+    document.querySelectorAll('.coming-soon-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            showComingSoonToast();
+        });
+    });
+}
+
+// Language Dropdown
+function toggleLanguageDropdown(e) {
+    e.stopPropagation();
+    const dropdown = e.currentTarget.closest('.language-dropdown');
+    dropdown.classList.toggle('open');
+}
+
+function selectLanguage(lang) {
+    const dropdown = document.querySelector('.language-dropdown');
+    if (dropdown) dropdown.classList.remove('open');
+
+    if (lang === 'en') {
+        showComingSoonToast();
+        return;
+    }
+}
+
+function initLanguageDropdown() {
+    document.addEventListener('click', function(e) {
+        const dropdown = document.querySelector('.language-dropdown');
+        if (dropdown && !dropdown.contains(e.target)) {
+            dropdown.classList.remove('open');
+        }
+    });
+}
+
+// Theme Toggle (Dark Mode)
+function toggleTheme() {
+    const html = document.documentElement;
+    const current = html.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+
+    // Update meta theme-color for mobile browsers
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    if (metaTheme) {
+        metaTheme.setAttribute('content', next === 'dark' ? '#0F1B2D' : '#334E68');
+    }
+}
+
+// Listen for system theme changes
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+    // Only auto-switch if user hasn't manually set a preference
+    if (!localStorage.getItem('theme')) {
+        document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+    }
+});
