@@ -526,7 +526,7 @@ img {
     background-color: var(--color-bg-secondary);
     border-radius: var(--radius-lg);
     margin-bottom: 20px;
-    color: var(--color-primary);
+    color: #829ab1;
 }
 
 .feature-card h3 {
@@ -2221,12 +2221,13 @@ img {
     align-items: center;
     justify-content: center;
     margin-bottom: 16px;
+    color: #829ab1;
 }
 
 .legal-header-card h1 {
     font-size: 32px;
     font-weight: 700;
-    color: #102a43;
+    color: #627d98;
     letter-spacing: -0.64px;
     margin-bottom: 8px;
 }
@@ -2374,7 +2375,7 @@ img {
 .legal-content-card h2 {
     font-size: 18px;
     font-weight: 700;
-    color: #102a43;
+    color: #627d98;
     margin-top: 32px;
     margin-bottom: 16px;
     padding-bottom: 12px;
@@ -2388,7 +2389,7 @@ img {
 .legal-content-card h3 {
     font-size: 15px;
     font-weight: 600;
-    color: #334e68;
+    color: #829ab1;
     margin-top: 24px;
     margin-bottom: 12px;
 }
@@ -3447,14 +3448,13 @@ body,
 }
 
 /* Dark mode SVG icon overrides */
-[data-theme="dark"] .feature-icon svg [stroke="#334E68"],
 [data-theme="dark"] .hero-bg-icon svg [fill="#334E68"] {
-    stroke: var(--color-primary);
     fill: var(--color-primary);
 }
 
 [data-theme="dark"] .feature-icon {
     background-color: var(--color-bg-tertiary);
+    color: var(--color-text-secondary);
 }
 
 /* Dark mode hero badge */
