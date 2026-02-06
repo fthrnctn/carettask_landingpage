@@ -347,7 +347,7 @@ function animateProgressBar() {
     const progressBar = document.querySelector('.progress-bar');
     if (progressBar) {
         let width = 0;
-        const targetWidth = 60;
+        const targetWidth = 30;
         const duration = 1500;
         const interval = 20;
         const increment = (targetWidth / duration) * interval;
@@ -357,10 +357,92 @@ function animateProgressBar() {
             if (width >= targetWidth) {
                 width = targetWidth;
                 clearInterval(animation);
+                animateTaskCompletion(progressBar, targetWidth);
             }
             progressBar.style.width = width + '%';
         }, interval);
     }
+}
+
+// Animate progress bar by a given amount, call onComplete when done
+function advanceProgressBar(progressBar, fromWidth, amount, duration, onComplete) {
+    const targetWidth = fromWidth + amount;
+    const interval = 20;
+    const increment = (amount / duration) * interval;
+    let w = fromWidth;
+
+    const anim = setInterval(() => {
+        w += increment;
+        if (w >= targetWidth) {
+            w = targetWidth;
+            clearInterval(anim);
+            if (onComplete) onComplete(w);
+        }
+        progressBar.style.width = w + '%';
+    }, interval);
+}
+
+// Phase 1: Middle card completion chain
+function animateTaskCompletion(progressBar, currentWidth) {
+    const taskCards = document.querySelectorAll('.mockup-tasks .task-card');
+    if (taskCards.length < 2) return;
+
+    const middleCard = taskCards[1];
+    const checkbox = middleCard.querySelector('.checkbox');
+
+    // Step 1: Checkbox fills green with checkmark (after 500ms pause)
+    setTimeout(() => {
+        if (checkbox) checkbox.classList.add('completed');
+
+        // Step 2: Card border turns green (400ms after checkbox)
+        setTimeout(() => {
+            middleCard.classList.add('completed');
+
+            // Step 3: Progress bar advances (400ms after border)
+            setTimeout(() => {
+                advanceProgressBar(progressBar, currentWidth, 20, 800, (newWidth) => {
+                    // Phase 2: First card warning → completion
+                    animateFirstCard(progressBar, newWidth, taskCards[0]);
+                });
+            }, 400);
+        }, 400);
+    }, 500);
+}
+
+// Phase 2: First card — warning state → completion
+function animateFirstCard(progressBar, currentWidth, firstCard) {
+    const checkbox = firstCard.querySelector('.checkbox');
+    const warningIcon = firstCard.querySelector('.task-warning-icon');
+
+    // Step 1: Red border (after 500ms pause)
+    setTimeout(() => {
+        firstCard.classList.add('warning');
+
+        // Step 2: Warning icon appears (500ms after red border)
+        setTimeout(() => {
+            if (warningIcon) warningIcon.classList.add('show');
+
+            // Step 3: Checkbox fills green (1000ms — let warning linger)
+            setTimeout(() => {
+                if (checkbox) checkbox.classList.add('completed');
+
+                // Step 4: Card turns green, warning icon hides (400ms after checkbox)
+                setTimeout(() => {
+                    firstCard.classList.remove('warning');
+                    firstCard.classList.add('completed');
+                    if (warningIcon) {
+                        warningIcon.classList.remove('show');
+                        warningIcon.classList.add('hide');
+                    }
+
+                    // Step 5: Progress bar advances (400ms after green)
+                    setTimeout(() => {
+                        advanceProgressBar(progressBar, currentWidth, 20, 800);
+                    }, 400);
+                }, 400);
+            }, 1000);
+        }, 500);
+    }, 500);
 }
 
 // Trigger progress bar animation when hero section is visible
