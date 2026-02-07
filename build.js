@@ -16,7 +16,7 @@ const pages = [
         basePath: '',
         cssPath: '',
         jsPath: '',
-        extraScripts: '<script src="survey.js?v=2"></script>'
+        extraScripts: '<script src="survey.js?v={{CACHE_VERSION}}"></script>'
     },
     {
         name: 'cerez-politikasi',
@@ -100,7 +100,7 @@ function replaceVariables(template, variables) {
 }
 
 // Build a single page
-function buildPage(pageConfig) {
+function buildPage(pageConfig, buildVersion) {
     // Read template
     const template = readFile(path.join(TEMPLATES_DIR, 'base.html'));
 
@@ -118,16 +118,18 @@ function buildPage(pageConfig) {
     const modals = `${cookieBanner}\n\n    ${authModal}`;
 
     // Build variables
+    const v = buildVersion || Date.now();
     const variables = {
         BASE_PATH: pageConfig.basePath,
         CSS_PATH: pageConfig.cssPath,
         JS_PATH: pageConfig.jsPath,
+        CACHE_VERSION: String(v),
         HEAD_CONTENT: headContent,
         HEADER: replaceVariables(header, { BASE_PATH: pageConfig.basePath }),
         FOOTER: replaceVariables(footer, { BASE_PATH: pageConfig.basePath }),
         PAGE_CONTENT: replaceVariables(pageContent, { BASE_PATH: pageConfig.basePath }),
         MODALS: replaceVariables(modals, { BASE_PATH: pageConfig.basePath }),
-        EXTRA_SCRIPTS: pageConfig.extraScripts
+        EXTRA_SCRIPTS: pageConfig.extraScripts.replace(/{{CACHE_VERSION}}/g, String(v))
     };
 
     // Replace all variables in template
@@ -148,9 +150,13 @@ function build() {
         process.exit(1);
     }
 
+    // Generate cache-busting version (timestamp)
+    const buildVersion = Date.now();
+    console.log(`  🏷️  Cache version: ${buildVersion}\n`);
+
     // Build each page
     for (const pageConfig of pages) {
-        buildPage(pageConfig);
+        buildPage(pageConfig, buildVersion);
     }
 
     console.log('\n✅ Build completed successfully!\n');
