@@ -518,9 +518,12 @@ function showAddAnotherEmail() {
     }, 100);
 }
 
+let authModalSource = 'signup';
+
 function openAuthModal(type) {
     const modal = document.getElementById('authModal');
     const title = document.getElementById('authModalTitle');
+    authModalSource = type || 'signup';
 
     // Set title based on type
     if (type === 'login') {
@@ -592,26 +595,77 @@ function submitAuthEmail() {
     // Clear error
     errorDiv.textContent = '';
 
-    // Save email to localStorage
-    saveSubmittedEmail(email);
+    // Disable button while submitting
+    const submitBtn = document.querySelector('.auth-submit-btn');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Gönderiliyor...';
 
-    // Here you would typically send the email to your backend
-    console.log('Email submitted:', email);
+    // Submit to n8n webhook
+    submitWaitlistToWebhook(email).then(function() {
+        saveSubmittedEmail(email);
+        showAuthSuccessState();
+    }).catch(function() {
+        saveSubmittedEmail(email);
+        showAuthSuccessState();
+    });
+}
 
-    // Show success state
+function showAuthSuccessState() {
     const content = document.querySelector('.auth-modal-content, .auth-success-content');
+    if (!content) return;
     content.className = 'auth-success-content';
-    content.innerHTML = `
-        <div class="auth-success-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#334E68" stroke-width="2.5">
-                <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-        </div>
-        <h2>Teşekkürler!</h2>
-        <p>E-posta adresiniz kaydedildi. CaretTask yayına girdiğinde sizi haberdar edeceğiz.</p>
-        <button class="auth-success-btn" onclick="closeAuthModal()">Tamam, Kapat</button>
-        <button class="auth-add-another-btn" onclick="showAddAnotherEmail()">Başka Mail Ekle</button>
-    `;
+    // Static trusted HTML - no user input
+    const div = document.createElement('div');
+
+    const iconWrap = document.createElement('div');
+    iconWrap.className = 'auth-success-icon';
+    iconWrap.insertAdjacentHTML('afterbegin', '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#334E68" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>');
+    div.appendChild(iconWrap);
+
+    const h2 = document.createElement('h2');
+    h2.textContent = 'Teşekkürler!';
+    div.appendChild(h2);
+
+    const p = document.createElement('p');
+    p.textContent = 'E-posta adresiniz kaydedildi. CaretTask yayına girdiğinde sizi haberdar edeceğiz.';
+    div.appendChild(p);
+
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'auth-success-btn';
+    closeBtn.textContent = 'Tamam, Kapat';
+    closeBtn.onclick = closeAuthModal;
+    div.appendChild(closeBtn);
+
+    const addBtn = document.createElement('button');
+    addBtn.className = 'auth-add-another-btn';
+    addBtn.textContent = 'Başka Mail Ekle';
+    addBtn.onclick = showAddAnotherEmail;
+    div.appendChild(addBtn);
+
+    content.replaceChildren(...div.childNodes);
+}
+
+async function submitWaitlistToWebhook(email) {
+    const WAITLIST_WEBHOOK_URL = 'https://n8n.carettask.com/webhook/carettask-waitlist';
+
+    const payload = {
+        email: email,
+        source: authModalSource,
+        submittedAt: new Date().toISOString(),
+        userAgent: navigator.userAgent,
+        screenSize: window.innerWidth + 'x' + window.innerHeight,
+        language: navigator.language || '',
+        referrer: document.referrer || ''
+    };
+
+    const response = await fetch(WAITLIST_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) throw new Error('Webhook failed');
+    return true;
 }
 
 // Coming Soon Toast
