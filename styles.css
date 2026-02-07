@@ -1665,15 +1665,14 @@ img {
     min-height: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
 }
 
 .survey-screen {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     text-align: center;
+    margin: auto 0;
 }
 
 .survey-emoji {
