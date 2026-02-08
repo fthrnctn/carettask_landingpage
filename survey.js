@@ -123,7 +123,8 @@ const surveyConfig = {
                 { id: 'attachments', title: 'Dosya ekleme', description: 'Görevlere dosya/link ekleyebiliyorum' },
                 { id: 'search', title: 'Arama/Filtreleme', description: 'İstediğimi hızlıca bulabiliyorum' },
                 { id: 'offline', title: 'Offline çalışma', description: 'İnternet olmadan da kullanabiliyorum' },
-                { id: 'nice-ui', title: 'Güzel/Modern arayüz', description: 'Kullanması keyifli, estetik' }
+                { id: 'nice-ui', title: 'Güzel/Modern arayüz', description: 'Kullanması keyifli, estetik' },
+                { id: 'ai-capabilities', title: 'Yapay Zeka Araçları', description: 'İşlerimi daha hızlı ve verimli yapmamı sağlıyor' }
             ]
         },
         {
