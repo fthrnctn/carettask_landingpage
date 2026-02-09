@@ -578,21 +578,34 @@ function renderSingleSelect(step) {
             <h2>${step.question}</h2>
             ${step.subtext ? `<p class="survey-subtext">${step.subtext}</p>` : ''}
             <div class="survey-options">
-                ${step.options.map(option => `
-                    <button class="survey-option ${selectedValue === option.id ? 'selected' : ''}"
-                            onclick="selectSingleOption('${step.id}', '${option.id}')">
+                ${step.options.map(option => {
+                    const isSelected = selectedValue === option.id;
+                    const isOther = option.isOther || false;
+                    const otherText = surveyState.otherTexts[option.id] || '';
+
+                    return `
+                    <button class="survey-option ${isSelected ? 'selected' : ''} ${isOther && isSelected ? 'survey-option-other-active' : ''}"
+                            onclick="selectSingleOption('${step.id}', '${option.id}', ${isOther})">
                         ${option.emoji ? `<span class="option-emoji">${option.emoji}</span>` : ''}
                         <div class="option-content">
-                            <div class="option-title">${option.title}</div>
-                            ${option.description ? `<div class="option-description">${option.description}</div>` : ''}
+                            ${isOther && isSelected ? `
+                                <input type="text" class="survey-other-input" placeholder="${option.title}: Lütfen belirtiniz..."
+                                       value="${otherText}"
+                                       oninput="updateOtherText('${option.id}', this.value)"
+                                       onclick="event.stopPropagation()">
+                            ` : `
+                                <div class="option-title">${option.title}</div>
+                                ${option.description ? `<div class="option-description">${option.description}</div>` : ''}
+                            `}
                         </div>
-                        ${selectedValue === option.id ? `
+                        ${isSelected ? `
                             <svg class="option-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
                         ` : ''}
                     </button>
-                `).join('')}
+                    `;
+                }).join('')}
             </div>
         </div>
     `;
@@ -701,18 +714,50 @@ function renderSuccessScreen() {
 }
 
 // Survey action functions
-function selectSingleOption(stepId, optionId) {
+function selectSingleOption(stepId, optionId, isOther) {
     surveyState.answers[stepId] = optionId;
+
+    // If "other" option, do full re-render to show input field
+    if (isOther) {
+        renderSurveyModal();
+        // Focus the input after render
+        setTimeout(() => {
+            const input = document.querySelector('.survey-other-input');
+            if (input) input.focus();
+        }, 50);
+        return;
+    }
+
+    // Clear other text if switching away from "other"
+    const currentStep = getCurrentStep();
+    let hadOtherActive = false;
+    if (currentStep && currentStep.options) {
+        currentStep.options.forEach(opt => {
+            if (opt.isOther && opt.id !== optionId) {
+                if (surveyState.otherTexts[opt.id]) hadOtherActive = true;
+                delete surveyState.otherTexts[opt.id];
+            }
+        });
+    }
+
+    // If an "other" input was open, do full re-render to close it properly
+    if (hadOtherActive || document.querySelector('.survey-other-input')) {
+        renderSurveyModal();
+        return;
+    }
 
     // Update UI without full re-render
     const options = document.querySelectorAll('.survey-option');
     options.forEach(option => {
         const isSelected = option.getAttribute('onclick')?.includes(`'${optionId}'`);
         option.classList.toggle('selected', isSelected);
+        option.classList.remove('survey-option-other-active');
 
         // Update checkmark
         const existingCheck = option.querySelector('.option-check');
         if (isSelected && !existingCheck) {
+            const polyline = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+            polyline.setAttribute('points', '20 6 9 17 4 12');
             const checkSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
             checkSvg.classList.add('option-check');
             checkSvg.setAttribute('width', '18');
@@ -721,7 +766,7 @@ function selectSingleOption(stepId, optionId) {
             checkSvg.setAttribute('fill', 'none');
             checkSvg.setAttribute('stroke', 'currentColor');
             checkSvg.setAttribute('stroke-width', '2');
-            checkSvg.innerHTML = '<polyline points="20 6 9 17 4 12"></polyline>';
+            checkSvg.appendChild(polyline);
             option.appendChild(checkSvg);
         } else if (!isSelected && existingCheck) {
             existingCheck.remove();
