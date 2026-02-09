@@ -61,7 +61,8 @@ const surveyConfig = {
                 { id: 'pm', title: 'Proje yöneticisi', description: 'Projeleri planlayıp yürütüyorum' },
                 { id: 'dept-manager', title: 'Departman yöneticisi', description: 'Bir departmanı yönetiyorum' },
                 { id: 'c-level', title: 'Üst düzey yönetici (C-level)', description: 'CEO, CTO, CFO gibi pozisyonlar' },
-                { id: 'founder', title: 'Kurucu/Sahip', description: 'Şirketin sahibi veya kurucusuyum' }
+                { id: 'founder', title: 'Kurucu/Sahip', description: 'Şirketin sahibi veya kurucusuyum' },
+                { id: 'other-role', title: 'Diğer', description: '', isOther: true }
             ]
         }
     ],
